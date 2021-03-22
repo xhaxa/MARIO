@@ -1,0 +1,25 @@
+#canvas {
+  width: 1200px;
+  height: 600px;
+  background-color: rgb(137, 174, 255);
+  margin: auto;
+  position: relative;
+}
+
+#mario {
+  background: url(../assets/mario.png);
+  background-size: contain;
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
+}
+
+#floor {
+  background: url(../assets/floor.png) repeat-x;
+  width: 1200px;
+  height: 50px;
+  position: absolute;
+  bottom: 0px;
+}
