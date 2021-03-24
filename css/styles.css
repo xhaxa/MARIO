@@ -20,11 +20,15 @@
   position: absolute;
   bottom: 50px;
   left: 100px;
-  transition: left 0.3s ease-in-out;
+  /* transition: left 0.5s ease-in-out; */
 }
 
 .mario-left {
   transform: scaleX(-1)
+} 
+
+.mario-up {
+
 }
 
 #floor {
@@ -41,4 +45,22 @@
   width: 110px;
   height: 80px;
   position: absolute;
+}
+
+#colision-lateral-der {
+  height: 50px;
+  width: 60px;
+  background-color: green;
+  left: 200px;
+  bottom: 50px;
+  position: absolute;
+
+}
+
+#colision-vertical {
+  height: 30px;
+  width: 120px;
+  background-color: yellow;
+  left: 200px;
+  bottom: 230px;
 }
