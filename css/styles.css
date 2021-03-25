@@ -1,3 +1,4 @@
+
 #game-title {
   text-align: center;
   font-size: 50px;
@@ -15,7 +16,7 @@
 #mario {
   background: url(../assets/mario.png);
   background-size: contain;
-  width: 60px;
+  width: 40px;
   height: 75px;
   position: absolute;
   bottom: 50px;
@@ -47,20 +48,10 @@
   position: absolute;
 }
 
-#colision-lateral-der {
+.obstacle {
   height: 50px;
   width: 60px;
   background-color: green;
-  left: 200px;
   bottom: 50px;
   position: absolute;
-
-}
-
-#colision-vertical {
-  height: 30px;
-  width: 120px;
-  background-color: yellow;
-  left: 200px;
-  bottom: 230px;
 }
