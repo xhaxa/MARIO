@@ -14,7 +14,7 @@ const GAME = {
   obstacle: {
     posX: 240,
     posY: 50,
-    width: 60,
+    width: 40,
     height: 50
   }
 }
@@ -71,16 +71,21 @@ function init() {
 }
 
 function canMarioMoveRight() {
-  const MarioRight = GAME.mario.posX + GAME.mario.width
-  const res = (Math.abs(GAME.obstacle.posX - MarioRight) >= GAME.mario.width
+  const marioRight = GAME.mario.posX + GAME.mario.width
+  const res = (Math.abs(GAME.obstacle.posX - marioRight) >= 0
      || GAME.mario.posY > GAME.obstacle.height + GAME.obstacle.posY)
   console.log('can Move right?`',res);  
   return res;
 }
 
+function canMarioFall (){
+  const obsTop = GAME.obstacle.posY + GAME.obstacle.height;
+  return !((GAME.mario.posY - obsTop) <= 0 && GAME.mario.posX <= GAME.obstacle.posX + GAME.obstacle.width && GAME.mario.posX + GAME.mario.width >= GAME.obstacle.posX)
+}
+
 function canMarioMoveLeft() {
-  const ObstacleRight = GAME.obstacle.posX + GAME.obstacle.width
-  const res = (Math.abs(GAME.mario.posX - ObstacleRight) >= GAME.mario.width
+  const obstacleRight = GAME.obstacle.posX + GAME.obstacle.width
+  const res = (Math.abs(GAME.mario.posX - obstacleRight) >= 0//GAME.mario.width
     || GAME.mario.posY > GAME.obstacle.height + GAME.obstacle.posY)
   console.log('can Move left?`',res);
   return res
@@ -99,14 +104,18 @@ document.addEventListener('keydown', function (event) {
       updateCloudsObstacles()
     }  else if (canMarioMoveRight()) {
       GAME.mario.posX += GAME.mario.width
+      console.log(canMarioFall ());
     }
   }
 
   if (event.code === 'ArrowLeft') {
+    
     GAME.mario.html.classList.add('mario-left')
-    if (canMarioMoveLeft()) {
+    if (canMarioMoveLeft()) {        ///////////////
       GAME.mario.posX -= GAME.mario.width
+      console.log(canMarioFall ());
     }
+
 
     if (GAME.mario.posX <= 0) {
       GAME.mario.posX = 0
@@ -121,26 +130,30 @@ document.addEventListener('keydown', function (event) {
       let timerId = setInterval(function() {
         GAME.mario.posY += GAME.mario.jSpeed
         GAME.mario.jSpeed -= GAME.gravity
-        updateMario()
+        //updateMario()
         // checkCollision()
         const obsTop = GAME.obstacle.posY + GAME.obstacle.height
         if (GAME.mario.jSpeed < 0
-          && Math.abs(GAME.mario.posY - obsTop) <= 20
+          && !canMarioFall()
+
           
-          && (!canMarioMoveLeft() || !canMarioMoveLeft())) {
+          
+          && (canMarioMoveLeft() && canMarioMoveRight())) {
             console.log('object detected. stop gravity');
             clearInterval(timerId)
             GAME.mario.jumping = false;
             GAME.mario.jSpeed = 0;
+            GAME.mario.posY = obsTop
         } else {
           if(GAME.mario.posY <= 50) {
             console.log('floor detected. stop gravity');
             clearInterval(timerId)
             GAME.mario.jumping = false;
             GAME.mario.jSpeed = 0;
-            GAME.mario.posY = obsTop;
+            GAME.mario.posY = 50;
           }
         }
+        if (timerId) updateMario()
         
       }, 100)
     }
