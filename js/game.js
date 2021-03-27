@@ -1,10 +1,11 @@
 const GAME = {
   numClouds: 30,
   mario: {
-    posX: 120,
+    posX: 100,
     posY: 50,
     width: 40,
     height: 75,
+    movement: 40,
     html: document.getElementById('mario'),
     jumping: false,
     jSpeed: 0
@@ -14,9 +15,32 @@ const GAME = {
   obstacle: {
     posX: 240,
     posY: 50,
-    width: 40,
-    height: 50
-  }
+    width: 80,
+    height: 80
+  },
+  obstacles: [
+    {
+      type: 'pipe',
+      posX: 240,
+      posY: 50,
+      width: 80,
+      height: 80,
+    },
+    {
+      type: 'floor',
+      posX: 0,
+      posY: 0,
+      width: 400,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 480,
+      posY: 0,
+      width: 1000,
+      height: 50
+    },
+  ]
 }
 
 const canvas = document.getElementById('canvas')
@@ -44,12 +68,25 @@ function cloudGeneration() {
   }
 }
 
+function marioGeneration() {
+  const marioHTML = document.getElementById('mario')
+  marioHTML.style.left = `${ GAME.mario.posX }px`
+  marioHTML.style.bottom = `${ GAME.mario.posY }px`
+  marioHTML.style.width = `${ GAME.mario.width }px`
+  marioHTML.style.height = `${ GAME.mario.height }px`
+}
+
 function obstacleGeneration() {
-  const obstacleHTML = document.createElement('div')
-  obstacleHTML.classList.add('obstacle')
-  obstacleHTML.style.left = `${ GAME.obstacle.posX }px`
-  canvas.appendChild(obstacleHTML)
-  GAME.obstacle.html = obstacleHTML
+  GAME.obstacles.forEach( function(obstacle) {
+    const obstacleHTML = document.createElement('div')
+    obstacleHTML.classList.add(obstacle.type)
+    obstacleHTML.style.left = `${ obstacle.posX }px`
+    obstacleHTML.style.bottom = `${ obstacle.posY }px`
+    obstacleHTML.style.width = `${ obstacle.width }px`
+    obstacleHTML.style.height = `${ obstacle.height }px`
+    canvas.appendChild(obstacleHTML)
+    obstacle.html = obstacleHTML
+  })  
 }
 
 /*Que las nubes se muevan -30px*/
@@ -65,37 +102,61 @@ function updateCloudsObstacles() {
 
 /*Inicializar el juego y generar sus elementos*/
 function init() {
+  marioGeneration()
   cloudGeneration()
   obstacleGeneration()
-  gravityStarts()
+  // gravityStarts()
 }
 
-function canMarioMoveRight() {
-  const marioRight = GAME.mario.posX + GAME.mario.width
-  const res = (Math.abs(GAME.obstacle.posX - marioRight) >= 0
-     || GAME.mario.posY > GAME.obstacle.height + GAME.obstacle.posY)
-  console.log('can Move right?`',res);  
-  return res;
+function isCollisionRight() {
+  let isCollision = false;
+  GAME.obstacles.forEach( function(obstacle) {
+    isCollision = isCollision ||
+      (obstacle.posX <= GAME.mario.posX + GAME.mario.width
+      && GAME.mario.posY + GAME.mario.height > obstacle.posY
+      && (GAME.mario.posY < obstacle.posY + obstacle.height))
+  })
+  console.log("Is there a right collision?: ", isCollision)
+  return isCollision
 }
 
-function canMarioFall (){
-  const obsTop = GAME.obstacle.posY + GAME.obstacle.height;
-  return !((GAME.mario.posY - obsTop) <= 0 && GAME.mario.posX <= GAME.obstacle.posX + GAME.obstacle.width && GAME.mario.posX + GAME.mario.width >= GAME.obstacle.posX)
+function isCollisionLeft() {
+  let isCollision = false;
+  GAME.obstacles.forEach( function(obstacle) {
+    isCollision = isCollision ||
+      (obstacle.posX + obstacle.width >= GAME.mario.posX
+      && GAME.mario.posY + GAME.mario.height > obstacle.posY
+      && GAME.mario.posY < obstacle.posY + obstacle.height)
+  })
+  console.log("Is there a left collision?: ", isCollision)
+  return isCollision
 }
 
-function canMarioMoveLeft() {
-  const obstacleRight = GAME.obstacle.posX + GAME.obstacle.width
-  const res = (Math.abs(GAME.mario.posX - obstacleRight) >= 0//GAME.mario.width
-    || GAME.mario.posY > GAME.obstacle.height + GAME.obstacle.posY)
-  console.log('can Move left?`',res);
-  return res
+function isCollisionBelow(){
+  let isCollision = false;
+  GAME.obstacles.forEach( function(obstacle) {
+    isCollision = isCollision ||
+      (GAME.mario.posY <= obstacle.posY + obstacle.height
+      && GAME.mario.posX < obstacle.posX + obstacle.width
+      && GAME.mario.posX + GAME.mario.width > obstacle.posX)
+  })
+  console.log("Is there a below collision?:", isCollision);
+  return isCollision
+  // const obsTop = GAME.obstacle.posY + GAME.obstacle.height;
+  // const res = !(GAME.mario.posY - obsTop <= 0 && GAME.mario.posX < GAME.obstacle.posX + GAME.obstacle.width && GAME.mario.posX + GAME.mario.width > GAME.obstacle.posX)
+  // console.log("RES", res);
+  // console.log("POSY", GAME.mario.posY )
+  // console.log("FALL ", GAME.mario.posY > 50 && res);
+  // return res
+  // // return GAME.mario.posY > 50 && res
 }
-function checkCollisionY() {
-  const col = (GAME.mario.posY + GAME.mario.height >= GAME.obstacle.posY
-       && GAME.mario.posY <= GAME.obstacle.posY + GAME.obstacle.height )
-       col ? console.log('colission y detected'): null
-       return col
-}
+
+// function checkCollisionY() {
+//   const col = (GAME.mario.posY + GAME.mario.height >= GAME.obstacle.posY
+//        && GAME.mario.posY <= GAME.obstacle.posY + GAME.obstacle.height )
+//        col ? console.log('colission y detected'): null
+//        return col
+// }
 
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
@@ -103,41 +164,38 @@ document.addEventListener('keydown', function (event) {
     if (GAME.mario.posX >= 500) {
       updateCloudsObstacles()
     }  else if (canMarioMoveRight()) {
-      GAME.mario.posX += GAME.mario.width
-      console.log(canMarioFall ());
+      GAME.mario.posX += GAME.mario.movement
+    }
+    if (canMarioFall()){
+          //makeMarioFall()
     }
   }
-
   if (event.code === 'ArrowLeft') {
-    
     GAME.mario.html.classList.add('mario-left')
     if (canMarioMoveLeft()) {        ///////////////
-      GAME.mario.posX -= GAME.mario.width
-      console.log(canMarioFall ());
+      GAME.mario.posX -= GAME.mario.movement
     }
-
 
     if (GAME.mario.posX <= 0) {
       GAME.mario.posX = 0
-    }  
+    }
+    if (canMarioFall()){
+      //makeMarioFall()
+}
   }
-
   if (event.code === 'ArrowUp') {
     if (!GAME.mario.jumping) {
       GAME.mario.jumping = true
       GAME.mario.jSpeed += 30
-
       let timerId = setInterval(function() {
         GAME.mario.posY += GAME.mario.jSpeed
         GAME.mario.jSpeed -= GAME.gravity
+        console.log(GAME.mario.posY)
         //updateMario()
         // checkCollision()
         const obsTop = GAME.obstacle.posY + GAME.obstacle.height
         if (GAME.mario.jSpeed < 0
           && !canMarioFall()
-
-          
-          
           && (canMarioMoveLeft() && canMarioMoveRight())) {
             console.log('object detected. stop gravity');
             clearInterval(timerId)
@@ -158,12 +216,7 @@ document.addEventListener('keydown', function (event) {
       }, 100)
     }
   }
-
   updateMario()
 })
-
-function gravityStarts() {
-
-}
 
 init()

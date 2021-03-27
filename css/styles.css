@@ -16,12 +16,12 @@
 #mario {
   background: url(../assets/mario.png);
   background-size: contain;
-  width: 40px;
-  height: 75px;
   position: absolute;
-  bottom: 50px;
-  left: 100px;
   /* transition: left 0.5s ease-in-out; */
+  /* width: 40px;
+  height: 75px;
+  bottom: 50px;
+  left: 100px; */
 }
 
 .mario-left {
@@ -32,13 +32,6 @@
 
 }
 
-#floor {
-  background: url(../assets/floor.png) repeat-x;
-  width: 1200px;
-  height: 50px;
-  position: absolute;
-  bottom: 0px;
-}
 
 .cloud {
   background: url(../assets/cloud.png);
@@ -49,9 +42,27 @@
 }
 
 .obstacle {
-  height: 50px;
-  width: 60px;
+  height: 80px;
+  width: 80px;
   background-color: green;
   bottom: 50px;
+  position: absolute;
+}
+
+.floor {
+  background: url(../assets/floor.png) repeat-x;
+  position: absolute;
+  /* width: 1200px;
+  height: 50px; */
+  /* bottom: 0px; */
+}
+
+.pipe {
+  background-color: green;
+  position: absolute;
+}
+
+.block {
+  background-color: brown;
   position: absolute;
 }
