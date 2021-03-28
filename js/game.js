@@ -15,7 +15,7 @@ const GAME = {
   obstacles: [
     {
       type: 'pipe',
-      posX: 300,
+      posX: 150,
       posY: 240,
       width: 80,
       height: 80,
@@ -137,6 +137,7 @@ function isCollisionLeft() {
   return isCollision
 }
 
+//COLISION ABAJO___
 function isCollisionBelow(){
   let collisionHeight = null;
   GAME.obstacles.forEach( function(obstacle) {
@@ -145,12 +146,13 @@ function isCollisionBelow(){
       && GAME.mario.posY + GAME.mario.height > obstacle.posY
       && GAME.mario.posX < obstacle.posX + obstacle.width
       && GAME.mario.posX + GAME.mario.width > obstacle.posX
-    if (isCollision) collisionHeight = obstacle.posY + obstacle.height
+    if (isCollision && !isCollisionAbove()) collisionHeight = obstacle.posY + obstacle.height
   })
-  //console.log("There is a below collision at:", collisionHeight);
+  console.log("There is a below collision at:", collisionHeight);
   return collisionHeight
 }
 
+//COLISION ARRIBA^^^
 function isCollisionAbove(){
   let collisionHeight = null;
   GAME.obstacles.forEach( function(obstacle) {
@@ -181,24 +183,58 @@ function fallDown(speed) {
     } else if (GAME.mario.posY < 0){
       console.log("HAS PERDIDO");
     }
+
     let collisionAboveHeight = isCollisionAbove()
     if (collisionAboveHeight !== null) {
       clearInterval(timerId)
       GAME.mario.jumping = false;
       GAME.mario.jSpeed = 0;
       GAME.mario.posY = collisionAboveHeight - GAME.mario.height;
-      fallDown(0)
+      fallDown(0)  
     }
+
+
     updateMario()
   }, 100)
 }
+/*
+function fallDownJumping(speed) {
+  GAME.mario.jumping = true
+  GAME.mario.jSpeed += speed
+  let timerId = setInterval(function() {
+    GAME.mario.posY += GAME.mario.jSpeed
+    GAME.mario.jSpeed -= GAME.gravity
+
+    let collisionAboveHeight = isCollisionAbove()
+    if (collisionAboveHeight !== null) {
+      clearInterval(timerId)
+      GAME.mario.jumping = false;
+      GAME.mario.jSpeed = 0;
+      GAME.mario.posY = collisionAboveHeight - GAME.mario.height;
+      fallDown(0)  
+    }
+
+    let collisionBelowHeight = isCollisionBelow()
+    if (collisionBelowHeight !== null) {
+      clearInterval(timerId)
+      GAME.mario.jumping = false;
+      GAME.mario.jSpeed = 0;
+      GAME.mario.posY = collisionBelowHeight
+    } else if (GAME.mario.posY < 0){
+      console.log("HAS PERDIDO -fallDownJumping");
+    }
+
+
+    updateMario()
+  }, 100)
+}*/
 
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
     if (GAME.mario.posX >= 500 && !isCollisionRight()) {
       updateCloudsObstacles()
-    }  else if (!isCollisionRight()) {
+    }  else if (!isCollisionRight()) { 
       GAME.mario.posX += GAME.mario.movement
     }
     if (isCollisionBelow() === null  && !GAME.mario.jumping) fallDown(0)
