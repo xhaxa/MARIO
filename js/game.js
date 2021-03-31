@@ -1,3 +1,12 @@
+
+const botonHTML = document.getElementById('playJuego');
+botonHTML.onclick = function (){
+  var pantallaInicio = document.getElementById('inicio');
+  pantallaInicio.setAttribute('class', 'ocultar')
+}
+ 
+
+
 const GAME = {
   numClouds: 30,
   mario: {
@@ -16,7 +25,7 @@ const GAME = {
     {
       type: 'pipe',
       posX: 150,
-      posY: 240,
+      posY: 140,
       width: 80,
       height: 80,
     },
@@ -161,7 +170,7 @@ function isCollisionAbove(){
       && obstacle.posY + obstacle.height > GAME.mario.posY
       && GAME.mario.posX < obstacle.posX + obstacle.width
       && GAME.mario.posX + GAME.mario.width > obstacle.posX
-    if (isCollision) collisionHeight = obstacle.posY
+    if (isCollision ) collisionHeight = obstacle.posY /*+ obstacle.height            AQUI ES DONDEE ESTA SITUANDOSE MAL*/
   })
   console.log("There is a ABOVE collision at:", collisionHeight);
   return collisionHeight
@@ -181,7 +190,7 @@ function fallDown(speed) {
       GAME.mario.jSpeed = 0;
       GAME.mario.posY = collisionBelowHeight
     } else if (GAME.mario.posY < 0){
-      console.log("HAS PERDIDO");
+      alert("HAS PERDIDO");/*-------*/
     }
 
     let collisionAboveHeight = isCollisionAbove()
@@ -228,6 +237,8 @@ function fallDownJumping(speed) {
     updateMario()
   }, 100)
 }*/
+
+
 
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
