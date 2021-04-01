@@ -11,7 +11,40 @@
   margin: auto;
   position: relative;
   overflow: hidden;
+}
 
+
+
+#sound {
+  background: url(../assets/sound.png);
+  background-size: contain;
+  position: absolute; 
+  width: 30px;
+  height: 30px;
+  top: 30px;
+  right: 30px;
+}
+
+
+
+.yes-sound {
+  background: url(../assets/sound.png);
+  background-size: contain;
+  position: absolute; 
+  width: 30px;
+  height: 30px;
+  top: 30px;
+  right: 30px;
+}
+
+.no-sound {
+  background: url(../assets/NoSound.png);
+  background-size: contain;
+  position: absolute; 
+  width: 30px;
+  height: 30px;
+  top: 30px;
+  right: 30px;
 }
 
 #mario {

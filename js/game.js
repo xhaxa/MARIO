@@ -3,8 +3,26 @@ const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
   pantallaInicio.setAttribute('class', 'ocultar')
+  sound.play()
 }
  
+const sound = new Audio ('assets/mountains.wav')
+sound.loop = true
+
+function stopSound(){
+  sound.pause()
+}
+
+const musicSound = document.getElementById('sound').
+addEventListener('click', function(event){
+  if (sound.play())
+  console.log('lelel');
+  stopSound()
+  
+
+  musicSound.classList.add("no-sound")
+})
+
 
 
 const GAME = {
