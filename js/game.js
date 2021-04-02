@@ -3,25 +3,24 @@ const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
   pantallaInicio.setAttribute('class', 'ocultar')
-  sound.play()
+  audio.play()
+  audio.loop = true
 }
  
-const sound = new Audio ('assets/mountains.wav')
-sound.loop = true
+const botonInstrucciones = document.getElementById('level1');
 
-function stopSound(){
-  sound.pause()
+botonInstrucciones.onclick = function (){
+  var pantallaInstrucciones = document.getElementById('instrucciones');
+  pantallaInstrucciones.setAttribute('class', 'ocultar')
 }
 
-const musicSound = document.getElementById('sound').
-addEventListener('click', function(event){
-  if (sound.play())
-  console.log('lelel');
-  stopSound()
-  
+const botonNivel = document.getElementById('letsGo');
+botonNivel.onclick = function (){
+  var pantallaNivel = document.getElementById('nivel1');
+  pantallaNivel.setAttribute('class', 'ocultar')
+}
 
-  musicSound.classList.add("no-sound")
-})
+
 
 
 
@@ -71,6 +70,7 @@ const GAME = {
 
   ]
 }
+
 
 const canvas = document.getElementById('canvas')
 
@@ -285,3 +285,40 @@ document.addEventListener('keydown', function (event) {
 })
 
 init()
+
+/*AUDIO*/
+/*
+const sound = new Audio ('assets/mountains.wav')
+sound.loop = true
+
+function stopSound(){
+  sound.pause()
+}
+*/
+
+var audio = document.getElementById('audio');
+var playPauseBTN = document.getElementById('musicButton');
+var seEscucha = true
+
+
+function playPause(){
+  if (seEscucha === true){
+  seEscucha = false;  
+  audio.pause();
+  playPauseBTN.classList.remove("soundOff")
+  playPauseBTN.classList.add("soundOn")
+  }else{
+    seEscucha = true;
+    audio.play();
+    audio.loop = true;
+    playPauseBTN.classList.remove("soundOn")
+    playPauseBTN.classList.add("soundOff") 
+  }
+}
+
+/*
+musicSound.addEventListener('click', function(event){
+  if (sound.play())
+  console.log('lelel');
+  musicSound.classList.add("soundOff")
+})*/

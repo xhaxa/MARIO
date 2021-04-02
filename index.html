@@ -4,21 +4,51 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARIO BROTHERS</title>
+  <title>Get The Picture!</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1 id="game-title">MARIO BROTHERS</h1>
+  <h1 id="game-title">Get The Picture!</h1>
   <div class="wrapper">
     <div id="canvas">
-      <button id="sound"></button>
-      <div id="mario"></div>
+      <div>
+        <audio id="audio"> <source src="assets/mountains.wav"> </audio>
+        <button id="musicButton" class="soundOff" onclick="playPause()"></button>
+      </div>
+      <div id="mario"></div> 
     </div>
-    <div id="nivel1"></div>
-    <div id="inicio">
-      <button id="playJuego">PLAY</button>
-    </div> 
+   
+    <div id="nivel1">
+      <p class="levelScreen">Level 1</p>
+      <div id="starryNight"></div>
+      <div class="fichaTecnica">
+        <p>Vincent van Gogh <br>
+        <em>The Starry Night</em>, 1889 <br>
+        Oil on canvas</p>
+        <p>Post-Impressionism</p>
+        <button id="letsGo">Let's Go!</button>
+      </div>
+
+    </div>
     
+    <div id="instrucciones">
+      <p id="intro">Welcome to Get The Picture! <br><br><br>
+        Are you ready to help world-renowned artists finish their masterpieces in time? <br><br>
+      You need to collect sections of the paintings that are scattered all over the museum galleries and take the artist it to the blank canvas so that they can put them together. <br><br>
+      But careful! You must also avoid the heaps of tourists and getting caught by thieves.
+      </p>
+      <button id="level1">Level 1</button>
+    </div>
+    
+    <div id="inicio">
+      <button id="playJuego">PLAY</button>  
+    </div>
+
+      
+    
+    
+    </div> 
+ 
   </div>
   <script src="./js/game.js"></script>
 </body>
