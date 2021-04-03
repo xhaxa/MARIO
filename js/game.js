@@ -1,4 +1,3 @@
-
 const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
@@ -21,11 +20,8 @@ botonNivel.onclick = function (){
 }
 
 
-
-
-
 const GAME = {
-  numClouds: 30,
+  numClouds: 150,
   mario: {
     posX: 60,
     posY: 50,
@@ -68,8 +64,48 @@ const GAME = {
       width: 1000,
       height: 50
     },
-  
-
+    {
+      type: 'floor',
+      posX: 1560,
+      posY: 0,
+      width: 600,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 2240,
+      posY: 0,
+      width: 900,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 3220,
+      posY: 0,
+      width: 1200,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 4500,
+      posY: 0,
+      width: 900,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 5480,
+      posY: 0,
+      width: 3000,
+      height: 50
+    },
+    {
+    type: 'meta',
+    posX: 7200,
+    posY: 50,
+    width: 180, 
+    height: 268,
+  },
 
   ]
 }
@@ -325,3 +361,4 @@ musicSound.addEventListener('click', function(event){
   console.log('lelel');
   musicSound.classList.add("soundOff")
 })*/
+
