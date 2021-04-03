@@ -27,30 +27,31 @@ botonNivel.onclick = function (){
 const GAME = {
   numClouds: 30,
   mario: {
-    posX: 40,
+    posX: 60,
     posY: 50,
-    width: 40,
-    height: 75,
-    movement: 40,
+    width: 60,
+    height: 95,
+    movement: 60,
     html: document.getElementById('mario'),
     jumping: false,
     jSpeed: 0
   },
   clouds: [],
+  barriers: [],
   gravity: 4,
   obstacles: [
-    {
+    {/*los obstáculos tendrán que ser multiplos de 60*/
       type: 'pipe',
-      posX: 150,
-      posY: 140,
-      width: 80,
+      posX: 120,
+      posY: 240,
+      width: 120,
       height: 80,
     },
     {
       type: 'pipe',
-      posX: 880,
+      posX: 720,
       posY: 50,
-      width: 80,
+      width: 120,
       height: 80,
     },
     {
@@ -67,6 +68,8 @@ const GAME = {
       width: 1000,
       height: 50
     },
+  
+
 
   ]
 }
@@ -82,7 +85,7 @@ function updateMario() {
 function cloudGeneration() {
   for (var i = 0; i < GAME.numClouds; i++) {
     let cloud = {
-      posY: Math.floor(Math.random() * 200) + 30,
+      posY: Math.floor(Math.random() * 50) + 30,
       posX: (i * 200) + Math.floor((Math.random() * 100))
     }
 

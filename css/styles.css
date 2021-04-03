@@ -7,7 +7,9 @@
 #canvas {
   width: 1200px;
   height: 600px;
-  background-color: rgb(137, 174, 255);
+  border-radius: 20px;
+  background: url(../assets/background.svg);
+  /*background-color: rgb(137, 174, 255);*/
   margin: auto;
   position: relative;
   overflow: hidden;
@@ -34,8 +36,8 @@
 }
 
 #mario {
-  background: url(../assets/mario.png);
-  background-size: contain;
+  background: url(../assets/van_gogh.svg);
+  background-size: cover;
   position: absolute;
   /* transition: left 0.5s ease-in-out; */
   /* width: 40px;
@@ -56,8 +58,8 @@
 .cloud {
   background: url(../assets/cloud.png);
   background-size: contain;
-  width: 110px;
-  height: 80px;
+  width: 45px;
+  height: 33px;
   position: absolute;
 }
 
@@ -69,8 +71,16 @@
   position: absolute;
 }
 
+.barrier {
+  height: 101px;
+  width: 271px;
+  background: url(../assets/barrera.svg);
+  bottom: 350px;
+  position: absolute;
+}
+
 .floor {
-  background: url(../assets/floor.png) repeat-x;
+  background: url(../assets/suelo_colisión.svg) repeat-x;
   position: absolute;
   /* width: 1200px;
   height: 50px; */
@@ -157,54 +167,53 @@
   font-size: 20px;
   position: relative;
   color: blue;
-  }
+}
 
-  #level1 {
-    border-radius: 30px;
-    border-style: none;
-    color: white;
-    width: 250px;
-    height: 75px;
-    background-color: rgb(8, 244, 158);
-    font-size: 25px;
-    color: black;
-    position:absolute;
-    margin-top:40px;
-    margin-left:425px;
-  }
-  
-  .levelScreen {
-    font-size: 72px;
-    text-align: center;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 50px;
-    }
-    
-    #starryNight {
-      background: url("../assets/starrynight.jpg");
-      position: absolute;
-      width: 415px;
-      height:260px;
-      margin-left: 10%;
-      margin-top: 10px;
-    }
-    
-    .fichaTecnica {
-      margin-left: 500px;
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      font-size: 25px;
-      color: rgb(255, 230, 0);
-    }
-    
-    #letsGo {
-      border-radius: 30px;
-      border-style: none;
-      width: 150px;
-      height: 50px;
-      background-color: rgb(244, 201, 8);
-      font-size: 25px;
-      color: black;
-      margin-top: 25px;
-    }
-    
+#level1 {
+border-radius: 30px;
+border-style: none;
+color: white;
+width: 250px;
+height: 75px;
+background-color: rgb(8, 244, 158);
+font-size: 25px;
+color: black;
+position:absolute;
+margin-top:40px;
+margin-left:425px;
+}
+
+.levelScreen {
+font-size: 72px;
+text-align: center;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+margin-top: 50px;
+}
+
+#starryNight {
+  background: url("../assets/starrynight.jpg");
+  position: absolute;
+  width: 415px;
+  height:260px;
+  margin-left: 10%;
+  margin-top: 10px;
+}
+
+.fichaTecnica {
+  margin-left: 500px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  font-size: 25px;
+  color: rgb(255, 230, 0);
+}
+
+#letsGo {
+  border-radius: 30px;
+  border-style: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(244, 201, 8);
+  font-size: 25px;
+  color: black;
+  margin-top: 25px;
+}
