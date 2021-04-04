@@ -33,28 +33,178 @@ const GAME = {
     jSpeed: 0
   },
   clouds: [],
+  paintings: [
+    {
+      name: 'selfportraitPicasso',
+      posX: 700,
+      posY: 260,
+      width: 150, 
+      height: 120,
+    },
+    {
+      name: 'birthVenus',
+      posX: 1400,
+      posY: 215,
+      width: 180, 
+      height: 180,
+    },
+    {
+      name: 'selfportraitVanGogh',
+      posX: 2200,
+      posY: 260,
+      width: 120, 
+      height: 120,
+    },
+    {
+      name: 'magritte',
+      posX: 2950,
+      posY: 220,
+      width: 150, 
+      height: 200,
+    },
+    {
+      name: 'sunflowers',
+      posX: 3700,
+      posY: 230,
+      width: 130, 
+      height: 200,
+    },
+    {
+      name: 'vermeer',
+      posX: 4500,
+      posY: 275,
+      width: 63, 
+      height: 92,
+    },
+    {
+      name: 'picassoPortrait',
+      posX: 5150,
+      posY: 230,
+      width: 150, 
+      height: 190,
+    },
+    {
+      name: 'monaLisa',
+      posX: 5900,
+      posY: 240,
+      width: 106, 
+      height: 152,
+    },
+    {
+      name: 'vanGoghPortrait',
+      posX: 6600,
+      posY: 230,
+      width: 150, 
+      height: 160,
+    }
+  ],
   barriers: [],
   gravity: 4,
   obstacles: [
-    {/*los obstáculos tendrán que ser multiplos de 60*/
+    {
+      type: 'meta',
+      posX: 7200,
+      posY: 50,
+      width: 233, 
+      height: 350,
+    },
+    /*{los obstáculos tendrán que ser multiplos de 60
       type: 'pipe',
       posX: 120,
       posY: 240,
       width: 120,
       height: 80,
-    },
+    },*/
     {
-      type: 'pipe',
-      posX: 720,
+      type: 'tourists',
+      posX: 300,
       posY: 50,
       width: 120,
+      height: 130,
+    },
+    {
+      type: 'tourists',
+      posX: 900,
+      posY: 50,
+      width: 120,
+      height: 130,
+    },
+
+    {
+      type: 'chandelier',
+      posX: 970,
+      posY: 290,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 1920,
+      posY: 290,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 3150,
+      posY: 290,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 3500,
+      posY: 290,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 4800,
+      posY: 290,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 5600,
+      posY: 290,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'vitrina',
+      posX: 1700,
+      posY: 240,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'vitrina',
+      posX: 3200,
+      posY: 240,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'vitrina',
+      posX: 3270,
+      posY: 320,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'vitrina',
+      posX: 5000,
+      posY: 200,
+      width: 75,
       height: 80,
     },
     {
       type: 'floor',
       posX: 0,
       posY: 0,
-      width: 400,
+      width: 1200,
       height: 50
     },
     {
@@ -100,13 +250,12 @@ const GAME = {
       height: 50
     },
     {
-    type: 'meta',
-    posX: 7200,
-    posY: 50,
-    width: 180, 
-    height: 268,
-  },
-
+      type: 'thief',
+      posX: 420,
+      posY: 50,
+      width: 79,
+      height: 85
+    }
   ]
 }
 
@@ -136,6 +285,58 @@ function cloudGeneration() {
   }
 }
 
+function barriersGeneration() {
+  for (var i = 0; i < 9; i++) {
+    let barrier = [
+    {
+      posY: 370,
+      posX: 670
+    },
+    {
+      posY: 370,
+      posX: 1390
+    },
+    {
+      posY: 370,
+      posX: 2165
+    },
+    {
+      posY: 370,
+      posX: 2933
+    },
+    {
+      posY: 370,
+      posX: 3672
+    },
+    {
+      posY: 370,
+      posX: 4442
+    },
+    {
+      posY: 370,
+      posX: 5132
+    },
+    {
+      posY: 370,
+      posX: 5865
+    },
+    {
+      posY: 370,
+      posX: 6586
+    }
+    ]
+
+    const barrierHTML = document.createElement('div')
+    barrierHTML.classList.add('barrier')
+    barrierHTML.style.top  = `${ barrier[i].posY }px`
+    barrierHTML.style.left = `${ barrier[i].posX }px`
+    canvas.appendChild(barrierHTML)
+
+    barrier[i].html = barrierHTML;
+    GAME.barriers.push(barrier[i])
+  }
+}
+
 function marioGeneration() {
   const marioHTML = document.getElementById('mario')
   marioHTML.style.left = `${ GAME.mario.posX }px`
@@ -157,6 +358,19 @@ function obstacleGeneration() {
   })  
 }
 
+function paintingsGeneration() {
+  GAME.paintings.forEach( function(painting) {
+    const paintingHTML = document.createElement('div')
+    paintingHTML.classList.add(painting.name)
+    paintingHTML.style.left = `${ painting.posX }px`
+    paintingHTML.style.bottom = `${ painting.posY }px`
+    paintingHTML.style.width = `${ painting.width }px`
+    paintingHTML.style.height = `${ painting.height }px`
+    canvas.appendChild(paintingHTML)
+    painting.html = paintingHTML
+  })  
+}
+
 /*Que las nubes se muevan -30px*/
 function updateCloudsObstacles() {
   GAME.clouds.forEach(function (cloud) {
@@ -169,6 +383,15 @@ function updateCloudsObstacles() {
     obstacle.html.style.left = `${obstacle.posX}px`
   })
     
+  GAME.paintings.forEach(function(painting){
+    painting.posX -= GAME.mario.width
+    painting.html.style.left = `${painting.posX}px`
+  })
+
+  GAME.barriers.forEach(function(barrier){
+    barrier.posX -= GAME.mario.width
+    barrier.html.style.left = `${barrier.posX}px`
+  })
 }
 
 /*Inicializar el juego y generar sus elementos*/
@@ -176,6 +399,8 @@ function init() {
   marioGeneration()
   cloudGeneration()
   obstacleGeneration()
+  paintingsGeneration()
+  barriersGeneration()
   // gravityStarts()
 }
 
@@ -306,7 +531,16 @@ document.addEventListener('keydown', function (event) {
       GAME.mario.posX += GAME.mario.movement
     }
     if (isCollisionBelow() === null  && !GAME.mario.jumping) fallDown(0)
-  }
+    console.log("Mario PosX", GAME.mario.posX)
+    console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
+    /* NO FURULA
+    if (GAME.obstacles[0].posX === 600){
+      document.getElementsByClassName("meta").style.background = "(../assets/caballete_completo.svg)"
+    }
+    if (GAME.obstacles[0].posX === 600){
+      GAME.obstacles[0].html.style.background = "(../assets/caballete_completo.svg)"
+    }*/
+    }
   if (event.code === 'ArrowLeft') {
     GAME.mario.html.classList.add('mario-left')
     if (!isCollisionLeft()) {        
@@ -318,7 +552,7 @@ document.addEventListener('keydown', function (event) {
     if (isCollisionBelow() === null && !GAME.mario.jumping) fallDown(0)
   }
   if (event.code === 'ArrowUp') {
-    if (!GAME.mario.jumping) fallDown(40)
+    if (!GAME.mario.jumping) fallDown(47)
   }
   updateMario()
 })

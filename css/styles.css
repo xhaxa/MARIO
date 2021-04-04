@@ -7,7 +7,7 @@
   width: 1200px;
   height: 600px;
   border-radius: 20px;
-  background: url(../assets/background.svg);
+  background: url(../assets/background_FINAL.svg);
   /*background-color: rgb(137, 174, 255);*/
   margin: auto;
   position: relative;
@@ -38,6 +38,7 @@
   background: url(../assets/van_gogh.svg);
   background-size: cover;
   position: absolute;
+  z-index: 2;
   /* transition: left 0.5s ease-in-out; */
   /* width: 40px;
   height: 75px;
@@ -49,11 +50,6 @@
   transform: scaleX(-1)
 } 
 
-.mario-up {
-
-}
-
-
 .cloud {
   background: url(../assets/cloud.png);
   background-size: contain;
@@ -62,19 +58,97 @@
   position: absolute;
 }
 
+.barrier {
+  background: url(../assets/barrera.svg);
+  background-size: contain;
+  width: 180px;
+  height: 67px;
+  position: absolute;
+  z-index:1;
+}
+
+.chandelier {
+  background: url(../assets/obstaculo_lampara.svg);
+  position: absolute;
+  background-size: contain;
+}
+
+.vitrina {
+  background: url(../assets/obstaculo_vitrina.svg);
+  position: absolute;
+}
+
+.tourists {
+  background: url(../assets/obstaculo_turistas.svg);
+  position: absolute;
+  z-index: 2;
+}
+
+.thief {
+  background: url(../assets/obstaculo_dinamico_ladron.svg);
+  position: absolute;
+  z-index: 2;
+}
+
+.selfportraitPicasso {
+  background: url(../assets/cuadros_pared_1.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.birthVenus {
+  background: url(../assets/cuadros_pared_2.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.selfportraitVanGogh {
+  background: url(../assets/cuadros_pared_3.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.magritte {
+  background: url(../assets/cuadros_pared_4.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.sunflowers {
+  background: url(../assets/cuadros_pared_5.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.vermeer {
+  background: url(../assets/cuadros_pared_6.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.picassoPortrait {
+  background: url(../assets/cuadros_pared_7.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.monaLisa {
+  background: url(../assets/cuadros_pared_8.svg);
+  position: absolute;
+  z-index: 0;
+}
+
+.vanGoghPortrait {
+  background: url(../assets/cuadros_pared_9.svg);
+  position: absolute;
+  z-index: 0;
+}
+
 .obstacle {
   height: 80px;
   width: 80px;
   background-color: green;
   bottom: 50px;
-  position: absolute;
-}
-
-.barrier {
-  height: 101px;
-  width: 271px;
-  background: url(../assets/barrera.svg);
-  bottom: 350px;
   position: absolute;
 }
 
@@ -99,7 +173,6 @@
 .meta {
   background: url(../assets/caballete_vacio.svg);
   position: absolute;
-  
 }
 
 /* Página de inicio */
@@ -117,7 +190,7 @@
   right: 0;
   margin: 0 auto;
   position: absolute;
- 
+ z-index: 5;
 }
 
 #nivel1 {
@@ -130,6 +203,7 @@
   right: 0;
   margin: 0 auto;
   position: absolute;
+  z-index: 3;
 
 }
 
@@ -163,6 +237,7 @@
   top: 25px;
   left: 0;
   right: 0;
+  z-index: 4;
 }
 
 #intro{
