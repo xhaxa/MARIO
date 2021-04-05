@@ -4,7 +4,7 @@ const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
   pantallaInicio.setAttribute('class', 'ocultar')
-  audio.play()
+  //audio.play()
   audio.loop = true
 }
 
@@ -36,224 +36,10 @@ const GAME = {
     jSpeed: 0
   },
   clouds: [],
-  paintings: [
-    {
-      name: 'selfportraitPicasso',
-      posX: 700,
-      posY: 260,
-      width: 150, 
-      height: 120,
-    },
-    {
-      name: 'birthVenus',
-      posX: 1400,
-      posY: 215,
-      width: 180, 
-      height: 180,
-    },
-    {
-      name: 'selfportraitVanGogh',
-      posX: 2200,
-      posY: 260,
-      width: 120, 
-      height: 120,
-    },
-    {
-      name: 'magritte',
-      posX: 2950,
-      posY: 220,
-      width: 150, 
-      height: 200,
-    },
-    {
-      name: 'sunflowers',
-      posX: 3700,
-      posY: 230,
-      width: 130, 
-      height: 200,
-    },
-    {
-      name: 'vermeer',
-      posX: 4500,
-      posY: 275,
-      width: 63, 
-      height: 92,
-    },
-    {
-      name: 'picassoPortrait',
-      posX: 5150,
-      posY: 230,
-      width: 150, 
-      height: 190,
-    },
-    {
-      name: 'monaLisa',
-      posX: 5900,
-      posY: 240,
-      width: 106, 
-      height: 152,
-    },
-    {
-      name: 'vanGoghPortrait',
-      posX: 6600,
-      posY: 230,
-      width: 150, 
-      height: 160,
-    }
-  ],
-  barriers: [],
-  gravity: 4,
-  obstacles: [
-    /*los obstáculos tendrán que estar posicionados en multiplos de 60 para que las 
-    colisiones coincidan con el movimiento de Mario que se mueve de 60px en 60px*/
-    {
-      type: 'meta',
-      posX: 7200,
-      posY: 50,
-      width: 233, 
-      height: 350,
-    },
-    {
-      type: 'tourists',
-      posX: 300,
-      posY: 50,
-      width: 120,
-      height: 130,
-    },
-    {
-      type: 'tourists',
-      posX: 900,
-      posY: 50,
-      width: 120,
-      height: 130,
-    },
-    {
-      type: 'chandelier',
-      posX: 1200,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 1920,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 2700,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 3500,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 4800,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 5600,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'vitrina',
-      posX: 1700,
-      posY: 240,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'vitrina',
-      posX: 3200,
-      posY: 240,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'vitrina',
-      posX: 3270,
-      posY: 320,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'vitrina',
-      posX: 5000,
-      posY: 200,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'floor',
-      posX: 0,
-      posY: 0,
-      width: 1200,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 480,
-      posY: 0,
-      width: 1000,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 1560,
-      posY: 0,
-      width: 600,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 2240,
-      posY: 0,
-      width: 900,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 3220,
-      posY: 0,
-      width: 1200,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 4500,
-      posY: 0,
-      width: 900,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 5480,
-      posY: 0,
-      width: 3000,
-      height: 50
-    },
-    {
-      type: 'thief',
-      posX: 420,
-      posY: 50,
-      width: 79,
-      height: 85
-    }
-  ]
+  paintings: PAINTINGS,
+  barriers: BARRIERS,
+  gravity: 12,
+  obstacles: OBSTACLES
 }
 
 /*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
@@ -286,55 +72,16 @@ function cloudGeneration() {
 
 /*Generates the barriers in front of the paintings at fixed positions - Genera las barreras delante de los cuadros en posiciones fijas*/
 function barriersGeneration() {
-  for (var i = 0; i < 9; i++) {
-    let barrier = [
-    {
-      posY: 370,
-      posX: 670
-    },
-    {
-      posY: 370,
-      posX: 1390
-    },
-    {
-      posY: 370,
-      posX: 2165
-    },
-    {
-      posY: 370,
-      posX: 2933
-    },
-    {
-      posY: 370,
-      posX: 3672
-    },
-    {
-      posY: 370,
-      posX: 4442
-    },
-    {
-      posY: 370,
-      posX: 5132
-    },
-    {
-      posY: 370,
-      posX: 5865
-    },
-    {
-      posY: 370,
-      posX: 6586
-    }
-    ]
 
+  GAME.barriers.forEach(function(barrier) {
     const barrierHTML = document.createElement('div')
     barrierHTML.classList.add('barrier')
-    barrierHTML.style.top  = `${ barrier[i].posY }px`
-    barrierHTML.style.left = `${ barrier[i].posX }px`
+    barrierHTML.style.top  = `${ barrier.posY }px`
+    barrierHTML.style.left = `${ barrier.posX }px`
     canvas.appendChild(barrierHTML)
-
-    barrier[i].html = barrierHTML;
-    GAME.barriers.push(barrier[i])
-  }
+  
+    barrier.html = barrierHTML;
+  })
 }
 
 /*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
@@ -396,6 +143,16 @@ function updateCloudsObstacles() {
   })
 }
 
+function enemyStartsMoving() {
+  const malote = GAME.obstacles[GAME.obstacles.length-1]
+  malote.dir = 1
+  setInterval(function() {
+    if (malote.posX > 850 || malote.posX < 420) { malote.dir *= -1}
+    malote.posX += 5*malote.dir;
+    malote.html.style.left = `${malote.posX}px`
+  }, 50)
+}
+
 /*Initialises the game by excecuting all the functions that generate elements - Inicializar el juego al ejecutir las funciones que generan los elementos*/
 function init() {
   marioGeneration()
@@ -403,20 +160,24 @@ function init() {
   obstacleGeneration()
   paintingsGeneration()
   barriersGeneration()
+  enemyStartsMoving()
   // gravityStarts()
 }
 
 /*Checks for collision between Mario's right hand side and obstacles - Comprueba colisión entre la derecha de Mario y los obstáculos */
 function isCollisionRight() {
-  let isCollision = false;
-  GAME.obstacles.forEach( function(obstacle) {
-    isCollision = isCollision ||
-      (obstacle.posX === GAME.mario.posX + GAME.mario.width
+  for (let i = 0; i < GAME.obstacles.length; i++) {
+    const obstacle = GAME.obstacles[i];
+    isCollision = obstacle.posX === GAME.mario.posX + GAME.mario.width
       && GAME.mario.posY + GAME.mario.height > obstacle.posY
-      && (GAME.mario.posY < obstacle.posY + obstacle.height))
-  })
-  console.log("Is there a right collision?: ", isCollision)
-  return isCollision
+      && (GAME.mario.posY < obstacle.posY + obstacle.height)
+    
+    if (isCollision) {
+      console.log("Is there a right collision?: ", isCollision)
+      return true
+    }
+  }
+  return false
 }
 
 /*Checks for collision between Mario's left hand side and obstacles - Comprueba colisión entre la izquierda de Mario y los obstáculos */
@@ -432,123 +193,106 @@ function isCollisionLeft() {
   return isCollision
 }
 
-/*NECESITA REVISIÓN*/
 /*Checks for collision between Mario's feet hand side and obstacles - Comprueba colisión entre los pies de Mario y los obstáculos */
 function isCollisionBelow(){
-  let collisionHeight = null;
-  GAME.obstacles.forEach( function(obstacle) {
+  for (let i = 0; i < GAME.obstacles.length; i++) {
+    const obstacle = GAME.obstacles[i];
     let isCollision = 
       GAME.mario.posY < obstacle.posY + obstacle.height
       && GAME.mario.posY + GAME.mario.height > obstacle.posY
       && GAME.mario.posX < obstacle.posX + obstacle.width
-      && GAME.mario.posX + GAME.mario.width > obstacle.posX
-    if (isCollision && !isCollisionAbove()) collisionHeight = obstacle.posY + obstacle.height
-  })
-  console.log("There is a below collision at:", collisionHeight);
-  return collisionHeight
+      && GAME.mario.posX + GAME.mario.width > obstacle.posX;
+
+    if (isCollision) {
+      console.log("There is a below collision at:", obstacle.posY + obstacle.height);
+      return obstacle.posY + obstacle.height;
+    }
+  }
+  return false
 }
 
 /*Checks for collision between Mario's head hand side and obstacles - Comprueba colisión entre la cabeza de Mario y los obstáculos */
 function isCollisionAbove(){
-  let collisionHeight = null;
-  GAME.obstacles.forEach( function(obstacle) {
+  for (let i = 0; i < GAME.obstacles.length; i++) {
+    const obstacle = GAME.obstacles[i];
+
     let isCollision = 
       GAME.mario.posY + GAME.mario.height > obstacle.posY
       && obstacle.posY + obstacle.height > GAME.mario.posY
       && GAME.mario.posX < obstacle.posX + obstacle.width
-      && GAME.mario.posX + GAME.mario.width > obstacle.posX
-    if (isCollision ) collisionHeight = obstacle.posY /*+ obstacle.height            AQUI ES DONDEE ESTA SITUANDOSE MAL*/
-  })
-  console.log("There is a ABOVE collision at:", collisionHeight);
-  return collisionHeight
+      && GAME.mario.posX + GAME.mario.width > obstacle.posX;
+
+    if (isCollision ) {
+      if (obstacle.type === 'vitrina') {
+        console.log('coge el cuadro')
+      }
+      console.log("There is a ABOVE collision at:", obstacle.posY);
+      return obstacle.posY
+    }
+  }
+  return false
 }
 
-/*NEEDS REVIEWING - NECESITA REVISIÓN*/
 /*Allows Mario to jump and stop once collision is detected on his head or feet - Permite saltar a Mario y detectar colisión en su cabeza y sus pies */
-function fallDown(speed) {
+function fallDown(speed=100) {
   GAME.mario.jumping = true
   GAME.mario.jSpeed += speed
   let timerId = setInterval(function() {
     GAME.mario.posY += GAME.mario.jSpeed
     GAME.mario.jSpeed -= GAME.gravity
 
-    let collisionBelowHeight = isCollisionBelow()
-    if (collisionBelowHeight !== null) {
-      clearInterval(timerId)
-      GAME.mario.jumping = false;
-      GAME.mario.jSpeed = 0;
-      GAME.mario.posY = collisionBelowHeight
-    } else if (GAME.mario.posY < 0){
-      alert("HAS PERDIDO");/*-------*/
+    // Moving Up
+    if (GAME.mario.jSpeed >= 0) {
+      let distCollission = isCollisionAbove()
+      if (distCollission) {
+        clearInterval(timerId)
+        GAME.mario.jumping = false;
+        GAME.mario.jSpeed = 0;
+        GAME.mario.posY = distCollission - GAME.mario.height;
+        console.log('moving up- collission detected')
+        fallDown(0)
+      }
+    } 
+    // Moving Down
+    else {
+      let distCollission = isCollisionBelow()
+      if (distCollission) {
+        clearInterval(timerId)
+        GAME.mario.jumping = false;
+        GAME.mario.jSpeed = 0;
+        GAME.mario.posY = distCollission
+        console.log('moving down- collission detected')
+      } else {
+        if (GAME.mario.posY < -50) {
+          clearInterval(timerId)
+          GAME.mario.jumping = false;
+          alert('YOU LOST IN THE CRACKS')
+        }
+      }
     }
-
-    let collisionAboveHeight = isCollisionAbove()
-    if (collisionAboveHeight !== null) {
-      clearInterval(timerId)
-      GAME.mario.jumping = false;
-      GAME.mario.jSpeed = 0;
-      GAME.mario.posY = collisionAboveHeight - GAME.mario.height;
-      fallDown(0)  
-    }
-
 
     updateMario()
-  }, 100)
+  }, 50)
 }
 
-/*Attempt to fix the current no-collision detected problem when jumping - Intento de arreglar el problema de no colisión detectada durante el salto*/
-/*function fallDownJumping(speed) {
-  GAME.mario.jumping = true
-  GAME.mario.jSpeed += speed
-  let timerId = setInterval(function() {
-    GAME.mario.posY += GAME.mario.jSpeed
-    GAME.mario.jSpeed -= GAME.gravity
-
-    let collisionAboveHeight = isCollisionAbove()
-    if (collisionAboveHeight !== null) {
-      clearInterval(timerId)
-      GAME.mario.jumping = false;
-      GAME.mario.jSpeed = 0;
-      GAME.mario.posY = collisionAboveHeight - GAME.mario.height;
-      fallDown(0)  
-    }
-
-    let collisionBelowHeight = isCollisionBelow()
-    if (collisionBelowHeight !== null) {
-      clearInterval(timerId)
-      GAME.mario.jumping = false;
-      GAME.mario.jSpeed = 0;
-      GAME.mario.posY = collisionBelowHeight
-    } else if (GAME.mario.posY < 0){
-      console.log("HAS PERDIDO -fallDownJumping");
-    }
-
-    updateMario()
-  }, 100)
-}*/
-
-/*NEEDS REVIEWING*/
 /*EventListeners to move Mario using arrow keys - EventListeners para mover a Mario usando las teclas de las flechas */
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
-    if (GAME.mario.posX >= 500 && !isCollisionRight()) {
-      updateCloudsObstacles()
-    }  else if (!isCollisionRight()) { 
-      GAME.mario.posX += GAME.mario.movement
+    
+    if (!isCollisionRight()) { 
+      if (GAME.mario.posX >= 500) {
+        updateCloudsObstacles()
+      } else {
+        GAME.mario.posX += GAME.mario.movement
+      }
     }
-    if (isCollisionBelow() === null  && !GAME.mario.jumping) fallDown(0)
+    if (!isCollisionBelow() && !GAME.mario.jumping) fallDown(0)
+
     console.log("Mario PosX", GAME.mario.posX)
     console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
-    /* NO FURULA - NEEDS REVIEWING*/
-    /*Attempt to change final blank canvas for canvas with painting once mission is completed - Intento de cambiar el lienzo vacío al final por marco con pintura cuando se finaliza la misión*/
-    /*if (GAME.obstacles[0].posX === 600){
-      document.getElementsByClassName("meta").style.background = "(../assets/caballete_completo.svg)"
-    }
-    if (GAME.obstacles[0].posX === 600){
-      GAME.obstacles[0].html.style.background = "(../assets/caballete_completo.svg)"
-    }*/
-    }
+  }
+
   if (event.code === 'ArrowLeft') {
     GAME.mario.html.classList.add('mario-left')
     if (!isCollisionLeft()) {        
@@ -557,35 +301,16 @@ document.addEventListener('keydown', function (event) {
     if (GAME.mario.posX <= 0) {
       GAME.mario.posX = 0
     }
-    if (isCollisionBelow() === null && !GAME.mario.jumping) fallDown(0)
+    if (!isCollisionBelow() && !GAME.mario.jumping) fallDown(0)
   }
+
   if (event.code === 'ArrowUp') {
-    if (!GAME.mario.jumping) fallDown(47)
+    console.log('mario jump');
+    if (!GAME.mario.jumping) fallDown()
   }
+
   updateMario()
 })
 
-/*Initialise function that generates the elements (declared in line 400) - Inicializa la función que genera los elementos (declarada en la línea 400)*/
+/* Initialise function that generates the elements - Inicializa la función que genera los elementos */
 init()
-
-/*NEEDS REVIEWING */
-/*Allows to turn music on/off - Permite encender/apagar la música*/
-var audio = document.getElementById('audio');
-var playPauseBTN = document.getElementById('musicButton');
-var seEscucha = true
-
-function playPause(){
-  if (seEscucha === true){
-  seEscucha = false;  
-  audio.pause();
-  playPauseBTN.classList.remove("soundOff")
-  playPauseBTN.classList.add("soundOn")
-  }else{
-    seEscucha = true;
-    audio.play();
-    audio.loop = true;
-    playPauseBTN.classList.remove("soundOn")
-    playPauseBTN.classList.add("soundOff") 
-  }
-}
-

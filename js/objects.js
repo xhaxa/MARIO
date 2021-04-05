@@ -1,0 +1,256 @@
+var OBSTACLES = [
+    /*los obstáculos tendrán que estar posicionados en multiplos de 60 para que las 
+    colisiones coincidan con el movimiento de Mario que se mueve de 60px en 60px*/
+    {
+      type: 'meta',
+      posX: 7200,
+      posY: 50,
+      width: 233, 
+      height: 350,
+    },
+    {
+      type: 'tourists',
+      posX: 300,
+      posY: 50,
+      width: 120,
+      height: 130,
+    },
+    {
+      type: 'tourists',
+      posX: 900,
+      posY: 50,
+      width: 120,
+      height: 130,
+    },
+    {
+      type: 'chandelier',
+      posX: 1200,
+      posY: 270,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 1920,
+      posY: 270,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 2700,
+      posY: 270,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 3500,
+      posY: 270,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 4800,
+      posY: 270,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'chandelier',
+      posX: 5600,
+      posY: 270,
+      width: 120,
+      height: 58,
+    },
+    {
+      type: 'vitrina',
+      posX: 1700,
+      posY: 240,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'vitrina',
+      posX: 3200,
+      posY: 240,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'vitrina',
+      posX: 3270,
+      posY: 320,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'vitrina',
+      posX: 5000,
+      posY: 200,
+      width: 75,
+      height: 80,
+    },
+    {
+      type: 'floor',
+      posX: 0,
+      posY: 0,
+      width: 1200,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 480,
+      posY: 0,
+      width: 1000,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 1560,
+      posY: 0,
+      width: 600,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 2240,
+      posY: 0,
+      width: 900,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 3220,
+      posY: 0,
+      width: 1200,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 4500,
+      posY: 0,
+      width: 900,
+      height: 50
+    },
+    {
+      type: 'floor',
+      posX: 5480,
+      posY: 0,
+      width: 3000,
+      height: 50
+    },
+    {
+      type: 'thief',
+      posX: 420,
+      posY: 50,
+      width: 79,
+      height: 85
+    }
+  ]
+
+var PAINTINGS = [
+    {
+      name: 'selfportraitPicasso',
+      posX: 700,
+      posY: 260,
+      width: 150, 
+      height: 120,
+    },
+    {
+      name: 'birthVenus',
+      posX: 1400,
+      posY: 215,
+      width: 180, 
+      height: 180,
+    },
+    {
+      name: 'selfportraitVanGogh',
+      posX: 2200,
+      posY: 260,
+      width: 120, 
+      height: 120,
+    },
+    {
+      name: 'magritte',
+      posX: 2950,
+      posY: 220,
+      width: 150, 
+      height: 200,
+    },
+    {
+      name: 'sunflowers',
+      posX: 3700,
+      posY: 230,
+      width: 130, 
+      height: 200,
+    },
+    {
+      name: 'vermeer',
+      posX: 4500,
+      posY: 275,
+      width: 63, 
+      height: 92,
+    },
+    {
+      name: 'picassoPortrait',
+      posX: 5150,
+      posY: 230,
+      width: 150, 
+      height: 190,
+    },
+    {
+      name: 'monaLisa',
+      posX: 5900,
+      posY: 240,
+      width: 106, 
+      height: 152,
+    },
+    {
+      name: 'vanGoghPortrait',
+      posX: 6600,
+      posY: 230,
+      width: 150, 
+      height: 160,
+    }
+  ]
+  
+var BARRIERS = [
+    {
+      posY: 370,
+      posX: 670
+    },
+    {
+      posY: 370,
+      posX: 1390
+    },
+    {
+      posY: 370,
+      posX: 2165
+    },
+    {
+      posY: 370,
+      posX: 2933
+    },
+    {
+      posY: 370,
+      posX: 3672
+    },
+    {
+      posY: 370,
+      posX: 4442
+    },
+    {
+      posY: 370,
+      posX: 5132
+    },
+    {
+      posY: 370,
+      posX: 5865
+    },
+    {
+      posY: 370,
+      posX: 6586
+    }
+]
