@@ -9,16 +9,19 @@
 </head>
 <body>
   <h1 id="game-title">Get The Picture!</h1>
+  <!--DIV containing Canvas, all screens within it and music file - DIV que contiene el canvas, todas las demás pantallas y el archivo musical-->
   <div class="wrapper">
+    <!--Canvas DIV - DIV Canvas-->
     <div id="canvas">
+     <!--Music File and Onclick - Archivo musical y OnClick--> 
       <div>
         <audio id="audio"> <source src="assets/walk_AdobeStock_353754565.wav"> </audio>
         <button id="musicButton" class="soundOff" onclick="playPause()"></button>
       </div>
-      
+      <!--Mario/Artists - Mario/Artists-->
       <div id="mario"></div> 
     </div>
-   
+   <!--Level 1 Screen - Pantalla Nivel 1-->
     <div id="nivel1">
       <p class="levelScreen">Level 1</p>
       <div id="starryNight"></div>
@@ -31,7 +34,7 @@
       </div>
 
     </div>
-    
+  <!--Instructions Screen - Pantalla Instrucciones-->
     <div id="instrucciones">
       <p id="intro">Welcome to Get The Picture! <br><br><br>
         Are you ready to help world-renowned artists finish their masterpieces in time? <br><br>
@@ -40,17 +43,12 @@
       </p>
       <button id="level1">Level 1</button>
     </div>
-    
+  <!--Welcome Screen - Pantalla Bienvenida--> 
     <div id="inicio">
       <button id="playJuego">PLAY</button>  
     </div>
 
       
-    
-    
-    </div> 
-    
- 
   </div>
   <script src="./js/game.js"></script>
 </body>

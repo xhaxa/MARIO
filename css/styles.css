@@ -3,17 +3,18 @@
   font-size: 50px;
 }
 
+
 #canvas {
   width: 1200px;
   height: 600px;
   border-radius: 20px;
   background: url(../assets/background_FINAL.svg);
-  /*background-color: rgb(137, 174, 255);*/
   margin: auto;
   position: relative;
   overflow: hidden;
 }
 
+/*Music on/off buttons - Botones de encender/apagar música*/
 .soundOn {
   background: url(../assets/sound.png);
   background-size: contain;
@@ -34,16 +35,12 @@
   right: 30px;
 }
 
+/*Mario and Mario horizontal flip - Mario y Mario volteado horizontalmente*/
 #mario {
   background: url(../assets/van_gogh.svg);
   background-size: cover;
   position: absolute;
   z-index: 2;
-  /* transition: left 0.5s ease-in-out; */
-  /* width: 40px;
-  height: 75px;
-  bottom: 50px;
-  left: 100px; */
 }
 
 .mario-left {
@@ -155,19 +152,6 @@
 .floor {
   background: url(../assets/suelo_colision.svg) repeat-x;
   position: absolute;
-  /* width: 1200px;
-  height: 50px; */
-  /* bottom: 0px; */
-}
-
-.pipe {
-  background-color: green;
-  position: absolute;
-}
-
-.block {
-  background-color: brown;
-  position: absolute;
 }
 
 .meta {
@@ -182,7 +166,6 @@
 
 #inicio {
   background: url("../assets/Pantalla_inicio.jpg");
-  /*border-radius: 20px;*/
   width: 1200px;
   height: 600px;
   top: 0;
@@ -204,7 +187,6 @@
   margin: 0 auto;
   position: absolute;
   z-index: 3;
-
 }
 
 #playJuego {
@@ -220,7 +202,6 @@
   right: 0;
   margin: 0 auto;
   position: absolute;
-  
 }
 
 .ocultar {

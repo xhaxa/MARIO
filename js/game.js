@@ -1,3 +1,5 @@
+
+/*Play button Welcome Screen - Botón PLAY Pantalla de Bienvenida*/
 const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
@@ -5,21 +7,22 @@ botonHTML.onclick = function (){
   audio.play()
   audio.loop = true
 }
- 
-const botonInstrucciones = document.getElementById('level1');
 
+/*Level 1 button Instructions Screen - Botón Level 1 Pantalla de Instrucciones*/
+const botonInstrucciones = document.getElementById('level1');
 botonInstrucciones.onclick = function (){
   var pantallaInstrucciones = document.getElementById('instrucciones');
   pantallaInstrucciones.setAttribute('class', 'ocultar')
 }
 
+/*Let's Go button Leven 1 Screen - Botón Let's Go Pantalla Nivel 1*/
 const botonNivel = document.getElementById('letsGo');
 botonNivel.onclick = function (){
   var pantallaNivel = document.getElementById('nivel1');
   pantallaNivel.setAttribute('class', 'ocultar')
 }
 
-
+/*GAME Object containing all the visual elements and obstacles in the game - Objeto GAME que contiene, todos los objetos y obstáculos del juego*/
 const GAME = {
   numClouds: 150,
   mario: {
@@ -101,6 +104,8 @@ const GAME = {
   barriers: [],
   gravity: 4,
   obstacles: [
+    /*los obstáculos tendrán que estar posicionados en multiplos de 60 para que las 
+    colisiones coincidan con el movimiento de Mario que se mueve de 60px en 60px*/
     {
       type: 'meta',
       posX: 7200,
@@ -108,13 +113,6 @@ const GAME = {
       width: 233, 
       height: 350,
     },
-    /*{los obstáculos tendrán que ser multiplos de 60
-      type: 'pipe',
-      posX: 120,
-      posY: 240,
-      width: 120,
-      height: 80,
-    },*/
     {
       type: 'tourists',
       posX: 300,
@@ -129,46 +127,45 @@ const GAME = {
       width: 120,
       height: 130,
     },
-
     {
       type: 'chandelier',
-      posX: 970,
-      posY: 290,
+      posX: 1200,
+      posY: 270,
       width: 120,
       height: 58,
     },
     {
       type: 'chandelier',
       posX: 1920,
-      posY: 290,
+      posY: 270,
       width: 120,
       height: 58,
     },
     {
       type: 'chandelier',
-      posX: 3150,
-      posY: 290,
+      posX: 2700,
+      posY: 270,
       width: 120,
       height: 58,
     },
     {
       type: 'chandelier',
       posX: 3500,
-      posY: 290,
+      posY: 270,
       width: 120,
       height: 58,
     },
     {
       type: 'chandelier',
       posX: 4800,
-      posY: 290,
+      posY: 270,
       width: 120,
       height: 58,
     },
     {
       type: 'chandelier',
       posX: 5600,
-      posY: 290,
+      posY: 270,
       width: 120,
       height: 58,
     },
@@ -259,14 +256,16 @@ const GAME = {
   ]
 }
 
-
+/*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
 const canvas = document.getElementById('canvas')
 
+/*Updates Mario's position as it moves - Actualiza la posición de Mario conforme se mueve*/
 function updateMario() {
   GAME.mario.html.style.left = GAME.mario.posX + 'px'
   GAME.mario.html.style.bottom = GAME.mario.posY + 'px'
 }
 
+/*Generates clouds randomly between certain posX and posY - Genera nubes aleatoriamente entre determinados valores de posX y posY*/
 function cloudGeneration() {
   for (var i = 0; i < GAME.numClouds; i++) {
     let cloud = {
@@ -285,6 +284,7 @@ function cloudGeneration() {
   }
 }
 
+/*Generates the barriers in front of the paintings at fixed positions - Genera las barreras delante de los cuadros en posiciones fijas*/
 function barriersGeneration() {
   for (var i = 0; i < 9; i++) {
     let barrier = [
@@ -337,6 +337,7 @@ function barriersGeneration() {
   }
 }
 
+/*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
 function marioGeneration() {
   const marioHTML = document.getElementById('mario')
   marioHTML.style.left = `${ GAME.mario.posX }px`
@@ -345,6 +346,7 @@ function marioGeneration() {
   marioHTML.style.height = `${ GAME.mario.height }px`
 }
 
+/*Generates the obstacles according to the values given in the object GAME - Genera obstáculos de acuerdo a los valores asignados en el objeto GAME*/
 function obstacleGeneration() {
   GAME.obstacles.forEach( function(obstacle) {
     const obstacleHTML = document.createElement('div')
@@ -358,6 +360,7 @@ function obstacleGeneration() {
   })  
 }
 
+/*Generates the paintings according to the values given in the object GAME - Genera los cuadros de acuerdo a los valores asignados en el objeto GAME*/
 function paintingsGeneration() {
   GAME.paintings.forEach( function(painting) {
     const paintingHTML = document.createElement('div')
@@ -370,8 +373,7 @@ function paintingsGeneration() {
     painting.html = paintingHTML
   })  
 }
-
-/*Que las nubes se muevan -30px*/
+/*Updates the positions of the elements (clouds, obstacles, paitings, barriers) to create impression of movement as we play with Mario - Actualiza la posición de los elementos (nubes, obstáculos, cuadros, barreras) para generar sensación de movimiento mientras jugamos con Mario*/
 function updateCloudsObstacles() {
   GAME.clouds.forEach(function (cloud) {
     cloud.posX -= GAME.mario.width
@@ -394,7 +396,7 @@ function updateCloudsObstacles() {
   })
 }
 
-/*Inicializar el juego y generar sus elementos*/
+/*Initialises the game by excecuting all the functions that generate elements - Inicializar el juego al ejecutir las funciones que generan los elementos*/
 function init() {
   marioGeneration()
   cloudGeneration()
@@ -404,6 +406,7 @@ function init() {
   // gravityStarts()
 }
 
+/*Checks for collision between Mario's right hand side and obstacles - Comprueba colisión entre la derecha de Mario y los obstáculos */
 function isCollisionRight() {
   let isCollision = false;
   GAME.obstacles.forEach( function(obstacle) {
@@ -416,6 +419,7 @@ function isCollisionRight() {
   return isCollision
 }
 
+/*Checks for collision between Mario's left hand side and obstacles - Comprueba colisión entre la izquierda de Mario y los obstáculos */
 function isCollisionLeft() {
   let isCollision = false;
   GAME.obstacles.forEach( function(obstacle) {
@@ -428,7 +432,8 @@ function isCollisionLeft() {
   return isCollision
 }
 
-//COLISION ABAJO___
+/*NECESITA REVISIÓN*/
+/*Checks for collision between Mario's feet hand side and obstacles - Comprueba colisión entre los pies de Mario y los obstáculos */
 function isCollisionBelow(){
   let collisionHeight = null;
   GAME.obstacles.forEach( function(obstacle) {
@@ -443,7 +448,7 @@ function isCollisionBelow(){
   return collisionHeight
 }
 
-//COLISION ARRIBA^^^
+/*Checks for collision between Mario's head hand side and obstacles - Comprueba colisión entre la cabeza de Mario y los obstáculos */
 function isCollisionAbove(){
   let collisionHeight = null;
   GAME.obstacles.forEach( function(obstacle) {
@@ -458,6 +463,8 @@ function isCollisionAbove(){
   return collisionHeight
 }
 
+/*NEEDS REVIEWING - NECESITA REVISIÓN*/
+/*Allows Mario to jump and stop once collision is detected on his head or feet - Permite saltar a Mario y detectar colisión en su cabeza y sus pies */
 function fallDown(speed) {
   GAME.mario.jumping = true
   GAME.mario.jSpeed += speed
@@ -488,8 +495,9 @@ function fallDown(speed) {
     updateMario()
   }, 100)
 }
-/*
-function fallDownJumping(speed) {
+
+/*Attempt to fix the current no-collision detected problem when jumping - Intento de arreglar el problema de no colisión detectada durante el salto*/
+/*function fallDownJumping(speed) {
   GAME.mario.jumping = true
   GAME.mario.jSpeed += speed
   let timerId = setInterval(function() {
@@ -515,13 +523,12 @@ function fallDownJumping(speed) {
       console.log("HAS PERDIDO -fallDownJumping");
     }
 
-
     updateMario()
   }, 100)
 }*/
 
-
-
+/*NEEDS REVIEWING*/
+/*EventListeners to move Mario using arrow keys - EventListeners para mover a Mario usando las teclas de las flechas */
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
@@ -533,8 +540,9 @@ document.addEventListener('keydown', function (event) {
     if (isCollisionBelow() === null  && !GAME.mario.jumping) fallDown(0)
     console.log("Mario PosX", GAME.mario.posX)
     console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
-    /* NO FURULA
-    if (GAME.obstacles[0].posX === 600){
+    /* NO FURULA - NEEDS REVIEWING*/
+    /*Attempt to change final blank canvas for canvas with painting once mission is completed - Intento de cambiar el lienzo vacío al final por marco con pintura cuando se finaliza la misión*/
+    /*if (GAME.obstacles[0].posX === 600){
       document.getElementsByClassName("meta").style.background = "(../assets/caballete_completo.svg)"
     }
     if (GAME.obstacles[0].posX === 600){
@@ -557,22 +565,14 @@ document.addEventListener('keydown', function (event) {
   updateMario()
 })
 
+/*Initialise function that generates the elements (declared in line 400) - Inicializa la función que genera los elementos (declarada en la línea 400)*/
 init()
 
-/*AUDIO*/
-/*
-const sound = new Audio ('assets/mountains.wav')
-sound.loop = true
-
-function stopSound(){
-  sound.pause()
-}
-*/
-
+/*NEEDS REVIEWING */
+/*Allows to turn music on/off - Permite encender/apagar la música*/
 var audio = document.getElementById('audio');
 var playPauseBTN = document.getElementById('musicButton');
 var seEscucha = true
-
 
 function playPause(){
   if (seEscucha === true){
@@ -588,11 +588,4 @@ function playPause(){
     playPauseBTN.classList.add("soundOff") 
   }
 }
-
-/*
-musicSound.addEventListener('click', function(event){
-  if (sound.play())
-  console.log('lelel');
-  musicSound.classList.add("soundOff")
-})*/
 
