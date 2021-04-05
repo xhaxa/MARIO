@@ -4,7 +4,7 @@ const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
   pantallaInicio.setAttribute('class', 'ocultar')
-  audio.play()
+  //audio.play()
   audio.loop = true
 }
 
@@ -36,224 +36,10 @@ const GAME = {
     jSpeed: 0
   },
   clouds: [],
-  paintings: [
-    {
-      name: 'selfportraitPicasso',
-      posX: 700,
-      posY: 260,
-      width: 150, 
-      height: 120,
-    },
-    {
-      name: 'birthVenus',
-      posX: 1400,
-      posY: 215,
-      width: 180, 
-      height: 180,
-    },
-    {
-      name: 'selfportraitVanGogh',
-      posX: 2200,
-      posY: 260,
-      width: 120, 
-      height: 120,
-    },
-    {
-      name: 'magritte',
-      posX: 2950,
-      posY: 220,
-      width: 150, 
-      height: 200,
-    },
-    {
-      name: 'sunflowers',
-      posX: 3700,
-      posY: 230,
-      width: 130, 
-      height: 200,
-    },
-    {
-      name: 'vermeer',
-      posX: 4500,
-      posY: 275,
-      width: 63, 
-      height: 92,
-    },
-    {
-      name: 'picassoPortrait',
-      posX: 5150,
-      posY: 230,
-      width: 150, 
-      height: 190,
-    },
-    {
-      name: 'monaLisa',
-      posX: 5900,
-      posY: 240,
-      width: 106, 
-      height: 152,
-    },
-    {
-      name: 'vanGoghPortrait',
-      posX: 6600,
-      posY: 230,
-      width: 150, 
-      height: 160,
-    }
-  ],
-  barriers: [],
+  paintings: PAINTINGS,
+  barriers: BARRIERS,
   gravity: 4,
-  obstacles: [
-    /*los obstáculos tendrán que estar posicionados en multiplos de 60 para que las 
-    colisiones coincidan con el movimiento de Mario que se mueve de 60px en 60px*/
-    {
-      type: 'meta',
-      posX: 7200,
-      posY: 50,
-      width: 233, 
-      height: 350,
-    },
-    {
-      type: 'tourists',
-      posX: 300,
-      posY: 50,
-      width: 120,
-      height: 130,
-    },
-    {
-      type: 'tourists',
-      posX: 900,
-      posY: 50,
-      width: 120,
-      height: 130,
-    },
-    {
-      type: 'chandelier',
-      posX: 1200,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 1920,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 2700,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 3500,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 4800,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'chandelier',
-      posX: 5600,
-      posY: 270,
-      width: 120,
-      height: 58,
-    },
-    {
-      type: 'vitrina',
-      posX: 1700,
-      posY: 240,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'vitrina',
-      posX: 3200,
-      posY: 240,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'vitrina',
-      posX: 3270,
-      posY: 320,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'vitrina',
-      posX: 5000,
-      posY: 200,
-      width: 75,
-      height: 80,
-    },
-    {
-      type: 'floor',
-      posX: 0,
-      posY: 0,
-      width: 1200,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 480,
-      posY: 0,
-      width: 1000,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 1560,
-      posY: 0,
-      width: 600,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 2240,
-      posY: 0,
-      width: 900,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 3220,
-      posY: 0,
-      width: 1200,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 4500,
-      posY: 0,
-      width: 900,
-      height: 50
-    },
-    {
-      type: 'floor',
-      posX: 5480,
-      posY: 0,
-      width: 3000,
-      height: 50
-    },
-    {
-      type: 'thief',
-      posX: 420,
-      posY: 50,
-      width: 79,
-      height: 85
-    }
-  ]
+  obstacles: OBSTACLES
 }
 
 /*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
@@ -286,55 +72,16 @@ function cloudGeneration() {
 
 /*Generates the barriers in front of the paintings at fixed positions - Genera las barreras delante de los cuadros en posiciones fijas*/
 function barriersGeneration() {
-  for (var i = 0; i < 9; i++) {
-    let barrier = [
-    {
-      posY: 370,
-      posX: 670
-    },
-    {
-      posY: 370,
-      posX: 1390
-    },
-    {
-      posY: 370,
-      posX: 2165
-    },
-    {
-      posY: 370,
-      posX: 2933
-    },
-    {
-      posY: 370,
-      posX: 3672
-    },
-    {
-      posY: 370,
-      posX: 4442
-    },
-    {
-      posY: 370,
-      posX: 5132
-    },
-    {
-      posY: 370,
-      posX: 5865
-    },
-    {
-      posY: 370,
-      posX: 6586
-    }
-    ]
 
+  GAME.barriers.forEach(function(barrier) {
     const barrierHTML = document.createElement('div')
     barrierHTML.classList.add('barrier')
-    barrierHTML.style.top  = `${ barrier[i].posY }px`
-    barrierHTML.style.left = `${ barrier[i].posX }px`
+    barrierHTML.style.top  = `${ barrier.posY }px`
+    barrierHTML.style.left = `${ barrier.posX }px`
     canvas.appendChild(barrierHTML)
-
-    barrier[i].html = barrierHTML;
-    GAME.barriers.push(barrier[i])
-  }
+  
+    barrier.html = barrierHTML;
+  })
 }
 
 /*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
@@ -532,11 +279,15 @@ function fallDown(speed) {
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
-    if (GAME.mario.posX >= 500 && !isCollisionRight()) {
-      updateCloudsObstacles()
-    }  else if (!isCollisionRight()) { 
-      GAME.mario.posX += GAME.mario.movement
+    
+    if (!isCollisionRight()) { 
+      if (GAME.mario.posX >= 500) {
+        updateCloudsObstacles()
+      } else {
+        GAME.mario.posX += GAME.mario.movement
+      }
     }
+
     if (isCollisionBelow() === null  && !GAME.mario.jumping) fallDown(0)
     console.log("Mario PosX", GAME.mario.posX)
     console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
@@ -548,7 +299,8 @@ document.addEventListener('keydown', function (event) {
     if (GAME.obstacles[0].posX === 600){
       GAME.obstacles[0].html.style.background = "(../assets/caballete_completo.svg)"
     }*/
-    }
+  }
+
   if (event.code === 'ArrowLeft') {
     GAME.mario.html.classList.add('mario-left')
     if (!isCollisionLeft()) {        
@@ -565,27 +317,5 @@ document.addEventListener('keydown', function (event) {
   updateMario()
 })
 
-/*Initialise function that generates the elements (declared in line 400) - Inicializa la función que genera los elementos (declarada en la línea 400)*/
+/* Initialise function that generates the elements - Inicializa la función que genera los elementos */
 init()
-
-/*NEEDS REVIEWING */
-/*Allows to turn music on/off - Permite encender/apagar la música*/
-var audio = document.getElementById('audio');
-var playPauseBTN = document.getElementById('musicButton');
-var seEscucha = true
-
-function playPause(){
-  if (seEscucha === true){
-  seEscucha = false;  
-  audio.pause();
-  playPauseBTN.classList.remove("soundOff")
-  playPauseBTN.classList.add("soundOn")
-  }else{
-    seEscucha = true;
-    audio.play();
-    audio.loop = true;
-    playPauseBTN.classList.remove("soundOn")
-    playPauseBTN.classList.add("soundOff") 
-  }
-}
-
