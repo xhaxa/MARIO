@@ -11,56 +11,77 @@ var OBSTACLES = [
   },
   {
     type: 'tourists',
-    posX: 300,
+    posX: 750,
     posY: 50,
     width: 120,
     height: 130,
   },
   {
     type: 'tourists',
-    posX: 900,
+    posX: 1400,
+    posY: 50,
+    width: 120,
+    height: 130,
+  },
+  {
+    type: 'tourists',
+    posX: 2900,
+    posY: 50,
+    width: 120,
+    height: 130,
+  },
+  {
+    type: 'tourists',
+    posX: 3950,
+    posY: 50,
+    width: 120,
+    height: 130,
+  },
+  {
+    type: 'tourists',
+    posX: 4650,
+    posY: 50,
+    width: 120,
+    height: 130,
+  },
+  {
+    type: 'tourists',
+    posX: 6600,
     posY: 50,
     width: 120,
     height: 130,
   },
   {
     type: 'chandelier',
-    posX: 1200,
+    posX: 1100,
     posY: 270,
     width: 120,
     height: 58,
   },
   {
     type: 'chandelier',
-    posX: 1920,
+    posX: 2600,
     posY: 270,
     width: 120,
     height: 58,
   },
   {
     type: 'chandelier',
-    posX: 2700,
+    posX: 3480,
     posY: 270,
     width: 120,
     height: 58,
   },
   {
     type: 'chandelier',
-    posX: 3500,
+    posX: 5350,
     posY: 270,
     width: 120,
     height: 58,
   },
   {
     type: 'chandelier',
-    posX: 4800,
-    posY: 270,
-    width: 120,
-    height: 58,
-  },
-  {
-    type: 'chandelier',
-    posX: 5600,
+    posX: 6800,
     posY: 270,
     width: 120,
     height: 58,
@@ -97,7 +118,7 @@ var OBSTACLES = [
     type: 'floor',
     posX: 0,
     posY: 0,
-    width: 1200,
+    width: 1900,
     height: 50
   },
   /*{
@@ -109,35 +130,28 @@ var OBSTACLES = [
   },*/
   {
     type: 'floor',
-    posX: 1300,
-    posY: 0,
-    width: 600,
-    height: 50
-  },
-  {
-    type: 'floor',
     posX: 2000,
     posY: 0,
-    width: 900,
+    width: 1600,
     height: 50
   },
   {
     type: 'floor',
-    posX: 3000,
+    posX: 3700,
     posY: 0,
-    width: 1200,
+    width: 1800,
     height: 50
   },
   {
     type: 'floor',
-    posX: 4300,
+    posX: 5600,
     posY: 0,
-    width: 900,
+    width: 800,
     height: 50
   },
   {
     type: 'floor',
-    posX: 5300,
+    posX: 6500,
     posY: 0,
     width: 3000,
     height: 50
@@ -252,23 +266,19 @@ var BARRIERS = [
 var HOLES = [
 {
   posY: 0,
-  posX: 1200
-},
-{
-  posY: 0,
   posX: 1900
 },
 {
   posY: 0,
-  posX: 2900
+  posX: 3600
 },
 {
   posY: 0,
-  posX: 4200
+  posX: 5500
 },
 {
   posY: 0,
-  posX: 5200
+  posX: 6400
 }
 ]
 
@@ -276,7 +286,25 @@ var HOLES = [
 var THIEFS = [
   {
     type: 'thief',
-    posInit: 660,
+    posInit: 1135,
+    posIncr: 48,
+    posX: 660,
+    posY: 50,
+    width: 80,
+    height: 85
+  },
+  {
+    type: 'thief',
+    posInit: 4360,
+    posIncr: 48,
+    posX: 660,
+    posY: 50,
+    width: 80,
+    height: 85
+  },
+  {
+    type: 'thief',
+    posInit: 6960,
     posIncr: 48,
     posX: 660,
     posY: 50,
@@ -285,3 +313,33 @@ var THIEFS = [
   }
 ]
 
+var COLLECTABLES = [
+  {
+    name: 'topRightCollectable',
+    posX: 1712,
+    posY: 256,
+    width: 53, 
+    height: 43,
+  }, 
+  {
+    name: 'topLeftCollectable',
+    posX: 3282,
+    posY: 337,
+    width: 53, 
+    height: 43,
+  },
+  {
+    name: 'bottomRightCollectable',
+    posX: 3212,
+    posY: 256,
+    width: 53, 
+    height: 43,
+  },
+  {
+    name: 'bottomLeftCollectable',
+    posX: 5012,
+    posY: 216,
+    width: 53, 
+    height: 43,
+  },
+]

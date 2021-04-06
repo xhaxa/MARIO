@@ -115,6 +115,27 @@
 .vitrina {
   background: url(../assets/obstaculo_vitrina.svg);
   position: absolute;
+  opacity: 0.8;
+}
+
+.topRightCollectable{
+  background: url(../assets/pintura_trozo_1.svg);
+  position: absolute;
+}
+
+.topLeftCollectable{
+  background: url(../assets/pintura_trozo_2.svg);
+  position: absolute;
+}
+
+.bottomRightCollectable{
+  background: url(../assets/pintura_trozo_3.svg);
+  position: absolute;
+}
+
+.bottomLeftCollectable{
+  background: url(../assets/pintura_trozo_4.svg);
+  position: absolute;
 }
 
 .tourists {

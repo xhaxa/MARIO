@@ -41,6 +41,7 @@ const GAME = {
   holes: HOLES,
   thiefs: THIEFS,
   obstacles: OBSTACLES,
+  collectables: COLLECTABLES,
   gravity: 4
 }
 
@@ -152,6 +153,20 @@ function paintingsGeneration() {
     painting.html = paintingHTML
   })  
 }
+
+function collectablesGeneration() {
+  GAME.collectables.forEach( function(collectable) {
+    const collectableHTML = document.createElement('div')
+    collectableHTML.classList.add(collectable.name)
+    collectableHTML.style.left = `${ collectable.posX }px`
+    collectableHTML.style.bottom = `${ collectable.posY }px`
+    collectableHTML.style.width = `${ collectable.width }px`
+    collectableHTML.style.height = `${ collectable.height }px`
+    canvas.appendChild(collectableHTML)
+    collectable.html = collectableHTML
+  })  
+}
+
 /*Updates the positions of the elements (clouds, obstacles, paitings, barriers) to create impression of movement as we play with Mario - Actualiza la posición de los elementos (nubes, obstáculos, cuadros, barreras) para generar sensación de movimiento mientras jugamos con Mario*/
 function updateCloudsObstacles() {
   GAME.clouds.forEach(function (cloud) {
@@ -178,10 +193,16 @@ function updateCloudsObstacles() {
     hole.posX -= GAME.mario.width
     hole.html.style.left = `${hole.posX}px`
   })  
+
   GAME.thiefs.forEach(function(thief){
-    thief.posInit -= GAME.mario.width
-    
+    thief.posInit -= GAME.mario.width  
   })
+
+  GAME.collectables.forEach(function(collectable){
+    collectable.posX -= GAME.mario.width
+    collectable.html.style.left = `${collectable.posX}px`
+  })
+
 
 }
 
@@ -208,7 +229,7 @@ function enemyStartsMoving() {
         && malote.posY + malote.height > GAME.mario.posY
         && malote.posY < GAME.mario.posY + GAME.mario.height
       ) {
-        alert("MUERTE POR LADRON")
+        //alert("MUERTE POR LADRON")
       }
     }, 50)
   })
@@ -222,6 +243,7 @@ function init() {
   paintingsGeneration()
   barriersGeneration()
   thiefsGeneration()
+  collectablesGeneration()
   enemyStartsMoving()
   holeGeneration()
   
@@ -340,7 +362,7 @@ function fallDown(speed=50) {
 }
 
 /*EventListeners to move Mario using arrow keys - EventListeners para mover a Mario usando las teclas de las flechas */
-document.addEventListener('keydown', function (event) {
+document.addEventListener('keyup', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
     
