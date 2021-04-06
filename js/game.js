@@ -24,13 +24,13 @@ botonNivel.onclick = function (){
 
 /*GAME Object containing all the visual elements and obstacles in the game - Objeto GAME que contiene, todos los objetos y obstáculos del juego*/
 const GAME = {
-  numClouds: 150,
+  numClouds: 0,
   mario: {
     posX: 60,
     posY: 50,
     width: 60,
     height: 95,
-    movement: 60,
+    movement: 30,
     html: document.getElementById('mario'),
     jumping: false,
     jSpeed: 0
@@ -39,8 +39,9 @@ const GAME = {
   paintings: PAINTINGS,
   barriers: BARRIERS,
   holes: HOLES,
-  gravity: 4,
-  obstacles: OBSTACLES
+  thiefs: THIEFS,
+  obstacles: OBSTACLES,
+  gravity: 4
 }
 
 /*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
@@ -123,6 +124,19 @@ function obstacleGeneration() {
   })  
 }
 
+function thiefsGeneration() {
+  GAME.thiefs.forEach( function(thief) {
+    console.log(thief);
+    const thiefHTML = document.createElement('div')
+    thiefHTML.classList.add('thief')
+    thiefHTML.style.left = `${ thief.posX }px`
+    thiefHTML.style.bottom = `${ thief.posY }px`
+    thiefHTML.style.width = `${ thief.width }px`
+    thiefHTML.style.height = `${ thief.height }px`
+    canvas.appendChild(thiefHTML)
+    thief.html = thiefHTML
+  })  
+}
 /*Generates the paintings according to the values given in the object GAME - Genera los cuadros de acuerdo a los valores asignados en el objeto GAME*/
 function paintingsGeneration() {
   GAME.paintings.forEach( function(painting) {
@@ -162,23 +176,29 @@ function updateCloudsObstacles() {
     hole.posX -= GAME.mario.width
     hole.html.style.left = `${hole.posX}px`
   })  
-  
+  GAME.thiefs.forEach(function(thief){
+    thief.posInit -= GAME.mario.width
+    
+  })
+
 }
 
 function enemyStartsMoving() {
-  const malote = GAME.obstacles[GAME.obstacles.length-1]
+  const malote = GAME.thiefs[0]
   malote.dir = 1
   setInterval(function() {
-    if (malote.posX > 820 ){ 
+    malote.posX += 5*malote.dir;
+    malote.html.style.left = `${malote.posX}px`
+    if (malote.posX > malote.posInit + malote.posIncr * 5){ 
+      malote.posX = malote.posInit + malote.posIncr * 5
       malote.html.classList.add('mario-left')
       malote.dir *= -1
     }
-     if ( malote.posX < 420){
+     if ( malote.posX < malote.posInit - malote.posIncr * 5){
+      malote.posX = malote.posInit - malote.posIncr * 5
       malote.html.classList.remove('mario-left')
       malote.dir *= -1
     }
-    malote.posX += 5*malote.dir;
-    malote.html.style.left = `${malote.posX}px`
   }, 50)
 }
 
@@ -189,8 +209,10 @@ function init() {
   obstacleGeneration()
   paintingsGeneration()
   barriersGeneration()
+  thiefsGeneration()
   enemyStartsMoving()
   holeGeneration()
+  
   // gravityStarts()
 }
 
