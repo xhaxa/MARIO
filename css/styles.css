@@ -8,7 +8,7 @@
   width: 1200px;
   height: 600px;
   border-radius: 20px;
-  background: url(../assets/background_FINAL.svg);
+  background: url(../assets/background_FINAL2.svg);
   margin: auto;
   position: relative;
   overflow: hidden;
@@ -42,6 +42,8 @@
   position: absolute;
   z-index: 2;
 }
+
+
 
 .mario-left {
   transform: scaleX(-1)
@@ -94,6 +96,16 @@
   z-index:1;
 }
 
+.hole {
+  background: url(../assets/hole.svg);
+  background-size: contain;
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  z-index:1;
+}
+
+
 .chandelier {
   background: url(../assets/obstaculo_lampara.svg);
   position: absolute;
@@ -117,11 +129,26 @@
   z-index: 2;
 }
 
+.thief-left {
+  transform: scaleX(-1)
+} 
+
 .selfportraitPicasso {
   background: url(../assets/cuadros_pared_1.svg);
   position: absolute;
   z-index: 0;
+  animation: bounce 3s ease infinite;
 }
+@keyframes bounce {
+    70% { transform:translateY(0%); }
+    80% { transform:translateY(-10%); }
+    90% { transform:translateY(0%); }
+    95% { transform:translateY(-7%); }
+   /* 97% { transform:translateY(0%); }
+    99% { transform:translateY(-1%); }
+    100% { transform:translateY(0); }*/
+}
+
 
 .birthVenus {
   background: url(../assets/cuadros_pared_2.svg);
@@ -187,6 +214,7 @@
 .meta {
   background: url(../assets/caballete_vacio.svg);
   position: absolute;
+  background-size: cover;
 }
 
 /* Página de inicio */

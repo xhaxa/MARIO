@@ -38,7 +38,8 @@ const GAME = {
   clouds: [],
   paintings: PAINTINGS,
   barriers: BARRIERS,
-  gravity: 12,
+  holes: HOLES,
+  gravity: 4,
   obstacles: OBSTACLES
 }
 
@@ -83,6 +84,21 @@ function barriersGeneration() {
     barrier.html = barrierHTML;
   })
 }
+
+function holeGeneration() {
+  GAME.holes.forEach(function(hole) {
+    const holeHTML = document.createElement('div')
+    holeHTML.classList.add('hole')
+    holeHTML.style.bottom  = `${ hole.posY }px`
+    holeHTML.style.left = `${ hole.posX }px`
+    canvas.appendChild(holeHTML)
+  
+    hole.html = holeHTML;
+  })
+}
+
+
+
 
 /*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
 function marioGeneration() {
@@ -141,13 +157,26 @@ function updateCloudsObstacles() {
     barrier.posX -= GAME.mario.width
     barrier.html.style.left = `${barrier.posX}px`
   })
+
+  GAME.holes.forEach(function(hole){
+    hole.posX -= GAME.mario.width
+    hole.html.style.left = `${hole.posX}px`
+  })  
+  
 }
 
 function enemyStartsMoving() {
   const malote = GAME.obstacles[GAME.obstacles.length-1]
   malote.dir = 1
   setInterval(function() {
-    if (malote.posX > 850 || malote.posX < 420) { malote.dir *= -1}
+    if (malote.posX > 820 ){ 
+      malote.html.classList.add('mario-left')
+      malote.dir *= -1
+    }
+     if ( malote.posX < 420){
+      malote.html.classList.remove('mario-left')
+      malote.dir *= -1
+    }
     malote.posX += 5*malote.dir;
     malote.html.style.left = `${malote.posX}px`
   }, 50)
@@ -161,6 +190,7 @@ function init() {
   paintingsGeneration()
   barriersGeneration()
   enemyStartsMoving()
+  holeGeneration()
   // gravityStarts()
 }
 
@@ -234,7 +264,7 @@ function isCollisionAbove(){
 }
 
 /*Allows Mario to jump and stop once collision is detected on his head or feet - Permite saltar a Mario y detectar colisión en su cabeza y sus pies */
-function fallDown(speed=100) {
+function fallDown(speed=50) {
   GAME.mario.jumping = true
   GAME.mario.jSpeed += speed
   let timerId = setInterval(function() {

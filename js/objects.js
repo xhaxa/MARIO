@@ -99,44 +99,44 @@ var OBSTACLES = [
       width: 1200,
       height: 50
     },
-    {
+    /*{
       type: 'floor',
       posX: 480,
       posY: 0,
       width: 1000,
       height: 50
-    },
+    },*/
     {
       type: 'floor',
-      posX: 1560,
+      posX: 1300,
       posY: 0,
       width: 600,
       height: 50
     },
     {
       type: 'floor',
-      posX: 2240,
+      posX: 2000,
       posY: 0,
       width: 900,
       height: 50
     },
     {
       type: 'floor',
-      posX: 3220,
+      posX: 3000,
       posY: 0,
       width: 1200,
       height: 50
     },
     {
       type: 'floor',
-      posX: 4500,
+      posX: 4300,
       posY: 0,
       width: 900,
       height: 50
     },
     {
       type: 'floor',
-      posX: 5480,
+      posX: 5300,
       posY: 0,
       width: 3000,
       height: 50
@@ -145,9 +145,10 @@ var OBSTACLES = [
       type: 'thief',
       posX: 420,
       posY: 50,
-      width: 79,
+      width: 80,
       height: 85
     }
+    
   ]
 
 var PAINTINGS = [
@@ -253,4 +254,27 @@ var BARRIERS = [
       posY: 370,
       posX: 6586
     }
+]
+
+var HOLES = [
+  {
+    posY: 0,
+    posX: 1200
+  },
+  {
+    posY: 0,
+    posX: 1900
+  },
+  {
+    posY: 0,
+    posX: 2900
+  },
+  {
+    posY: 0,
+    posX: 4200
+  },
+  {
+    posY: 0,
+    posX: 5200
+  }
 ]
