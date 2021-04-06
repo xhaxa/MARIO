@@ -98,7 +98,9 @@ function holeGeneration() {
   })
 }
 
+function drawVisibleItems() {
 
+}
 
 
 /*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
@@ -184,22 +186,32 @@ function updateCloudsObstacles() {
 }
 
 function enemyStartsMoving() {
-  const malote = GAME.thiefs[0]
-  malote.dir = 1
-  setInterval(function() {
-    malote.posX += 5*malote.dir;
-    malote.html.style.left = `${malote.posX}px`
-    if (malote.posX > malote.posInit + malote.posIncr * 5){ 
-      malote.posX = malote.posInit + malote.posIncr * 5
-      malote.html.classList.add('mario-left')
-      malote.dir *= -1
-    }
-     if ( malote.posX < malote.posInit - malote.posIncr * 5){
-      malote.posX = malote.posInit - malote.posIncr * 5
-      malote.html.classList.remove('mario-left')
-      malote.dir *= -1
-    }
-  }, 50)
+  GAME.thiefs.forEach( function(malote) {
+    malote.dir = 1
+    const timerId = setInterval(function() {
+      malote.posX += 5*malote.dir;
+      malote.html.style.left = `${malote.posX}px`
+      if (malote.posX > malote.posInit + malote.posIncr * 5){ 
+        malote.posX = malote.posInit + malote.posIncr * 5
+        malote.html.classList.add('mario-left')
+        malote.dir *= -1
+      }
+      if ( malote.posX < malote.posInit - malote.posIncr * 5){
+        malote.posX = malote.posInit - malote.posIncr * 5
+        malote.html.classList.remove('mario-left')
+        malote.dir *= -1
+      }
+      //if collision with Mario
+      if (
+        malote.posX < GAME.mario.posX + GAME.mario.width
+        && malote.posX + malote.width > GAME.mario.posX
+        && malote.posY + malote.height > GAME.mario.posY
+        && malote.posY < GAME.mario.posY + GAME.mario.height
+      ) {
+        alert("MUERTE POR LADRON")
+      }
+    }, 50)
+  })
 }
 
 /*Initialises the game by excecuting all the functions that generate elements - Inicializar el juego al ejecutir las funciones que generan los elementos*/
