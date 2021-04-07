@@ -30,7 +30,7 @@ const GAME = {
     posY: 50,
     width: 60,
     height: 95,
-    movement: 30,
+    movement: 60,
     html: document.getElementById('mario'),
     jumping: false,
     jSpeed: 0
@@ -130,7 +130,7 @@ function obstacleGeneration() {
 
 function thiefsGeneration() {
   GAME.thiefs.forEach( function(thief) {
-    console.log(thief);
+    // console.log(thief);
     const thiefHTML = document.createElement('div')
     thiefHTML.classList.add('thief')
     thiefHTML.style.left = `${ thief.posX }px`
@@ -197,7 +197,8 @@ function updateCloudsObstacles() {
   })  
 
   GAME.thiefs.forEach(function(thief){
-    thief.posInit -= GAME.mario.width  
+    thief.posInit -= GAME.mario.width
+    thief.posX -= GAME.mario.width
   })
 
   GAME.collectables.forEach(function(collectable){
@@ -231,7 +232,7 @@ function enemyStartsMoving() {
         && malote.posY + malote.height > GAME.mario.posY
         && malote.posY < GAME.mario.posY + GAME.mario.height
       ) {
-        //alert("MUERTE POR LADRON")
+        // console.log('muerteeee');
       }
     }, 50)
   })
@@ -261,7 +262,7 @@ function isCollisionRight() {
       && (GAME.mario.posY < obstacle.posY + obstacle.height)
     
     if (isCollision) {
-      console.log("Is there a right collision?: ", isCollision)
+      // console.log("Is there a right collision?: ", isCollision)
       return true
     }
   }
@@ -277,7 +278,7 @@ function isCollisionLeft() {
       && GAME.mario.posY + GAME.mario.height > obstacle.posY
       && GAME.mario.posY < obstacle.posY + obstacle.height)
   })
-  console.log("Is there a left collision?: ", isCollision)
+  // console.log("Is there a left collision?: ", isCollision)
   return isCollision
 }
 
@@ -292,7 +293,7 @@ function isCollisionBelow(){
       && GAME.mario.posX + GAME.mario.width > obstacle.posX;
 
     if (isCollision) {
-      console.log("There is a below collision at:", obstacle.posY + obstacle.height);
+      // console.log("There is a below collision at:", obstacle.posY + obstacle.height);
       return obstacle.posY + obstacle.height;
     }
   }
@@ -312,9 +313,9 @@ function isCollisionAbove(){
 
     if (isCollision ) {
       if (obstacle.type === 'vitrina') {
-        console.log('coge el cuadro')
+        // console.log('coge el cuadro')
       }
-      console.log("There is a ABOVE collision at:", obstacle.posY);
+      // console.log("There is a ABOVE collision at:", obstacle.posY);
       return obstacle.posY
     }
   }
@@ -337,7 +338,7 @@ function fallDown(speed=50) {
         GAME.mario.jumping = false;
         GAME.mario.jSpeed = 0;
         GAME.mario.posY = distCollission - GAME.mario.height;
-        console.log('moving up- collission detected')
+        // console.log('moving up- collission detected')
         fallDown(0)
       }
     } 
@@ -349,7 +350,7 @@ function fallDown(speed=50) {
         GAME.mario.jumping = false;
         GAME.mario.jSpeed = 0;
         GAME.mario.posY = distCollission
-        console.log('moving down- collission detected')
+        // console.log('moving down- collission detected')
       } else {
         if (GAME.mario.posY < -50) {
           clearInterval(timerId)
@@ -364,7 +365,7 @@ function fallDown(speed=50) {
 }
 
 /*EventListeners to move Mario using arrow keys - EventListeners para mover a Mario usando las teclas de las flechas */
-document.addEventListener('keyup', function (event) {
+document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
     
@@ -374,11 +375,13 @@ document.addEventListener('keyup', function (event) {
       } else {
         GAME.mario.posX += GAME.mario.movement
       }
+      console.log(GAME.thiefs[0].posX);
+      // console.log('Ancho total de mario' , GAME.mario.posX + GAME.mario.width);
     }
     if (!isCollisionBelow() && !GAME.mario.jumping) fallDown(0)
 
-    console.log("Mario PosX", GAME.mario.posX)
-    console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
+    // console.log("Mario PosX", GAME.mario.posX)
+    // console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
   }
 
   if (event.code === 'ArrowLeft') {
@@ -393,7 +396,7 @@ document.addEventListener('keyup', function (event) {
   }
 
   if (event.code === 'ArrowUp') {
-    console.log('mario jump');
+    // console.log('mario jump');
     if (!GAME.mario.jumping) fallDown()
   }
 

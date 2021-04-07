@@ -142,7 +142,7 @@ div.points > p {
 .hole {
   background: url(../assets/hole.svg);
   background-size: contain;
-  width: 100px;
+  width: 120px;
   height: 50px;
   position: absolute;
   z-index:1;

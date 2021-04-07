@@ -11,35 +11,35 @@ var OBSTACLES = [
   },
   {
     type: 'tourists',
-    posX: 750,
+    posX: 720,
     posY: 50,
     width: 120,
     height: 130,
   },
   {
     type: 'tourists',
-    posX: 1400,
+    posX: 1440,
     posY: 50,
     width: 120,
     height: 130,
   },
   {
     type: 'tourists',
-    posX: 2900,
+    posX: 2880,
     posY: 50,
     width: 120,
     height: 130,
   },
   {
     type: 'tourists',
-    posX: 3950,
+    posX: 3960,
     posY: 50,
     width: 120,
     height: 130,
   },
   {
     type: 'tourists',
-    posX: 4650,
+    posX: 4680,
     posY: 50,
     width: 120,
     height: 130,
@@ -118,7 +118,7 @@ var OBSTACLES = [
     type: 'floor',
     posX: 0,
     posY: 0,
-    width: 1900,
+    width: 1800,
     height: 50
   },
   /*{
@@ -130,28 +130,28 @@ var OBSTACLES = [
   },*/
   {
     type: 'floor',
-    posX: 2000,
+    posX: 1920,
     posY: 0,
-    width: 1600,
+    width: 1680,
     height: 50
   },
   {
     type: 'floor',
-    posX: 3700,
+    posX: 3720,
     posY: 0,
     width: 1800,
     height: 50
   },
   {
     type: 'floor',
-    posX: 5600,
+    posX: 5640,
     posY: 0,
-    width: 800,
+    width: 600,
     height: 50
   },
   {
     type: 'floor',
-    posX: 6500,
+    posX: 6360,
     posY: 0,
     width: 3000,
     height: 50
@@ -266,7 +266,7 @@ var BARRIERS = [
 var HOLES = [
 {
   posY: 0,
-  posX: 1900
+  posX: 1800
 },
 {
   posY: 0,
@@ -274,11 +274,11 @@ var HOLES = [
 },
 {
   posY: 0,
-  posX: 5500
+  posX: 5520
 },
 {
   posY: 0,
-  posX: 6400
+  posX: 6240
 }
 ]
 
