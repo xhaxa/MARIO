@@ -153,7 +153,7 @@ var OBSTACLES = [
     type: 'floor',
     posX: 6360,
     posY: 0,
-    width: 3000,
+    width: 1200,
     height: 50
   }
 ]

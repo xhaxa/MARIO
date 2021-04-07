@@ -36,14 +36,39 @@ const GAME = {
     jSpeed: 0
   },
   clouds: [],
-  paintings: PAINTINGS,
-  barriers: BARRIERS,
-  holes: HOLES,
-  thiefs: THIEFS,
-  obstacles: OBSTACLES,
-  collectables: COLLECTABLES,
-  gravity: 4
+  paintings: PAINTINGS.slice(0),
+  barriers: BARRIERS.slice(0),
+  holes: HOLES.slice(0),
+  thiefs: THIEFS.slice(0),
+  obstacles: [...OBSTACLES],
+  collectables: COLLECTABLES.slice(0),
+  gravity: 4,
+  score: 0,
+  maxScore: 4
 }
+
+function restartGame(){
+  removeHtmlItems()
+  GAME.mario.posX = 60;
+  GAME.mario.posY = 50;
+  GAME.mario.jumping = false;
+  GAME.mario.jSpeed = 0;
+  GAME.score = 0;
+  GAME.maxScore = 4;
+  GAME.clouds = [];
+  GAME.paintings = PAINTINGS.slice(0);
+  GAME.barriers = BARRIERS.slice(0);
+  GAME.holes = HOLES.slice(0);
+  GAME.thiefs = THIEFS.slice(0);
+  GAME.obstacles = OBSTACLES.slice(0);
+  GAME.collectables = COLLECTABLES.slice(0);
+}
+
+function updateScore(){
+  let scoreHTML = document.getElementById('number-picture');
+  scoreHTML.innerText = `${GAME.score}/${GAME.maxScore}`
+}
+
 
 /*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
 const canvas = document.getElementById('canvas')
@@ -119,6 +144,10 @@ function obstacleGeneration() {
   GAME.obstacles.forEach( function(obstacle) {
     const obstacleHTML = document.createElement('div')
     obstacleHTML.classList.add(obstacle.type)
+      if (obstacle.type === 'vitrina'){
+        obstacleHTML.classList.add('hasCollectable')
+      }
+
     obstacleHTML.style.left = `${ obstacle.posX }px`
     obstacleHTML.style.bottom = `${ obstacle.posY }px`
     obstacleHTML.style.width = `${ obstacle.width }px`
@@ -167,6 +196,36 @@ function collectablesGeneration() {
     canvas.appendChild(collectableHTML)
     collectable.html = collectableHTML
   })  
+}
+
+function removeHtmlItems() {
+  GAME.collectables.forEach( function(item) {
+    item.html.remove()
+  })
+
+  GAME.obstacles.forEach( function(item) {
+    item.html.remove()
+  })
+
+  GAME.paintings.forEach( function(item) {
+    item.html.remove()
+  })
+
+  GAME.barriers.forEach( function(item) {
+    item.html.remove()
+  })
+
+  GAME.thiefs.forEach( function(item) {
+    item.html.remove()
+  })
+
+  GAME.holes.forEach( function(item) {
+    item.html.remove()
+  })
+
+  GAME.clouds.forEach( function(item) {
+    item.html.remove()
+  })
 }
 
 /*Updates the positions of the elements (clouds, obstacles, paitings, barriers) to create impression of movement as we play with Mario - Actualiza la posición de los elementos (nubes, obstáculos, cuadros, barreras) para generar sensación de movimiento mientras jugamos con Mario*/
@@ -232,7 +291,9 @@ function enemyStartsMoving() {
         && malote.posY + malote.height > GAME.mario.posY
         && malote.posY < GAME.mario.posY + GAME.mario.height
       ) {
-        // console.log('muerteeee');
+        console.log('muerteeee');
+        restartGame()
+        init()
       }
     }, 50)
   })
@@ -312,8 +373,15 @@ function isCollisionAbove(){
       && GAME.mario.posX + GAME.mario.width > obstacle.posX;
 
     if (isCollision ) {
-      if (obstacle.type === 'vitrina') {
-        // console.log('coge el cuadro')
+      console.log(obstacle.html.classList); 
+      if (obstacle.type === 'vitrina' && obstacle.html.classList.contains('hasCollectable')) {
+        obstacle.html.classList.remove('hasCollectable')
+        GAME.score++
+        GAME.collectables.filter(function(collectable){
+         return collectable.posX > obstacle.posX && collectable.posX < obstacle.posX + obstacle.width  
+        })[0].html.remove()
+        updateScore()
+        console.log('coge el cuadro')
       }
       // console.log("There is a ABOVE collision at:", obstacle.posY);
       return obstacle.posY
@@ -371,6 +439,9 @@ document.addEventListener('keydown', function (event) {
     
     if (!isCollisionRight()) { 
       if (GAME.mario.posX >= 500) {
+        console.log("ORIGINAL", OBSTACLES[0].posX);
+        console.log("ORIGINAL", GAME.obstacles[0].posX);
+        
         updateCloudsObstacles()
       } else {
         GAME.mario.posX += GAME.mario.movement
