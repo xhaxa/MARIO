@@ -79,6 +79,7 @@ function barriersGeneration() {
   GAME.barriers.forEach(function(barrier) {
     const barrierHTML = document.createElement('div')
     barrierHTML.classList.add('barrier')
+    barrierHTML.classList.add('blur')
     barrierHTML.style.top  = `${ barrier.posY }px`
     barrierHTML.style.left = `${ barrier.posX }px`
     canvas.appendChild(barrierHTML)
@@ -145,6 +146,7 @@ function paintingsGeneration() {
   GAME.paintings.forEach( function(painting) {
     const paintingHTML = document.createElement('div')
     paintingHTML.classList.add(painting.name)
+    paintingHTML.classList.add('blur')
     paintingHTML.style.left = `${ painting.posX }px`
     paintingHTML.style.bottom = `${ painting.posY }px`
     paintingHTML.style.width = `${ painting.width }px`
