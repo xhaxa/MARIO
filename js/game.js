@@ -60,10 +60,7 @@ const GAME = {
 }
 
 function restartGame(){
-  removeHtmlItems();
-  timerId.forEach(function(timer){
-    clearInterval(timer)
-  })
+ 
   GAME.mario.posX = 60;
   GAME.mario.posY = 50;
   GAME.mario.jumping = false;
@@ -95,6 +92,9 @@ function restartGame(){
     return {...collectable}
   })
   updateScore()
+  const divMuerte = document.getElementById('muerte');
+  divMuerte.style.display = 'none';
+  init()
 }
 
 function updateScore(){
@@ -159,10 +159,29 @@ function holeGeneration() {
   })
 }
 
-function drawVisibleItems() {
-
+function dead() {
+  removeHtmlItems();
+  timerId.forEach(function(timer){
+    clearInterval(timer)
+  })
+  const divMuerte = document.getElementById('muerte');
+  divMuerte.style.display = 'block';
 }
 
+function win(){
+  removeHtmlItems();
+  timerId.forEach(function(timer){
+    clearInterval(timer)
+  })
+  const divWin = document.getElementById('win')
+  divWin.style.display = 'block';
+  const divWinText = document.getElementById('win-text')
+  if (GAME.score === GAME.maxScore){
+    divWinText.innerText = 'Has ganado'
+  } else {
+    divWinText.innerText = 'Te faltan piezas'
+  }
+}
 
 /*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
 function marioGeneration() {
@@ -326,11 +345,10 @@ function enemyStartsMoving() {
         && malote.posY < GAME.mario.posY + GAME.mario.height
       ) {
         console.log('muerteeee');
-       
-        restartGame()
- /* una funcion que  ponga un div (MUERTE ) con un boton que tenga un evento que haga init()*/
-/*luego quitar el init() de aqui abajo*/
-        init()
+        dead()
+        /*restartGame()
+ 
+        init()*/
       }
     }, 50)
   })
@@ -360,6 +378,9 @@ function isCollisionRight() {
       && (GAME.mario.posY < obstacle.posY + obstacle.height)
     
     if (isCollision) {
+      if (obstacle.type === 'meta') {
+        win()
+      }
       // console.log("Is there a right collision?: ", isCollision)
       return true
     }
@@ -460,9 +481,9 @@ function fallDown(speed=50) {
         if (GAME.mario.posY < -50) {
           clearInterval(timerId)
           GAME.mario.jumping = false;
-          restartGame()
-          /*lo mismo que en la muerte por ladrón*/
-          init()
+          dead()
+          /*restartGame()
+          init()*/
         }
       }
     }
@@ -510,7 +531,24 @@ document.addEventListener('keydown', function (event) {
     if (!GAME.mario.jumping) fallDown()
   }
 
+
   updateMario()
+})
+
+let restartButton = document.getElementById ('restart-button')
+
+restartButton.addEventListener('click', function(){
+  console.log('fdsfasd');
+  restartGame()
+})
+
+document.getElementById('win-button').addEventListener('click', function(){
+  if (GAME.score < GAME.maxScore){
+    restartGame()
+  } else {
+    const divWinText = document.getElementById('win-text')
+    divWinText.innerText = 'Juego DEMO, próximas versiones'
+  }
 })
 
 /* Initialise function that generates the elements - Inicializa la función que genera los elementos */
