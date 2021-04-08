@@ -21,13 +21,16 @@ html {
 
 
 #points > p {
-  margin: 0;
-  display: inline-block;
+ margin: 0 0 2px 0;
+ display: inline-block;
 }
+
+
 
 #points {
   font-family: monospace;
-  font-size: 30px;
+  font-size: 25px;
+  border-radius: 30px;
   text-align: center;
   width: 200px;
   height: 80px;
@@ -35,16 +38,13 @@ html {
   position: relative;
   margin: 30px 0 100px 30px;
   color: white;
-
 }
 
 
 .picture-points {
   width: 55px;
   height: 40px;
-  display: inline-block;
-  margin: 0;
-  
+  display: inline-block; 
 }
 
 #canvas {
@@ -415,8 +415,28 @@ margin: 30px 0 60px 15px;
   margin-top: 66px;
 }
 
+#muerte{
+  font-size: 25px;
+}
+
+div#muerte > p {
+  margin-top: 150px;
+  text-align: center;
+  padding: 0 40px;
+}
+
+div#win-text{
+  font-size: 25px;
+}
+
+div#win-text {
+  margin-top: 150px;
+  text-align: center;
+}
+
 .container {
   background-color:rgb(244, 201, 8);;
+  box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.8);
   border-radius: 30px;
   position: absolute;
   margin: 0 auto;
@@ -427,7 +447,7 @@ margin: 30px 0 60px 15px;
   right: 0;
   z-index: 3;
   text-align: center;
-  display: none;
+  /*display: none;*/
 }
 
 .container-button {
@@ -441,5 +461,15 @@ margin: 30px 0 60px 15px;
   font-size: 35px;
   letter-spacing: 2px;
   color: black;
-  margin-top: 350px;
+ 
 }
+/*
+.comingSoon {
+background: url(../assets/picasso.svg);
+z-index: 4;
+width: 60px;
+height: 95px;
+background-size: contain;
+margin: 150px auto 0 auto;
+
+}*/

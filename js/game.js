@@ -177,9 +177,9 @@ function win(){
   divWin.style.display = 'block';
   const divWinText = document.getElementById('win-text')
   if (GAME.score === GAME.maxScore){
-    divWinText.innerText = 'Has ganado'
+    divWinText.innerText = 'Well done! \n\n COMING SOON:'
   } else {
-    divWinText.innerText = 'Te faltan piezas'
+    divWinText.innerText = 'Well done but you missed some fragments! \n\n COMING SOON:'
   }
 }
 
