@@ -36,19 +36,34 @@ const GAME = {
     jSpeed: 0
   },
   clouds: [],
-  paintings: PAINTINGS.slice(0),
-  barriers: BARRIERS.slice(0),
-  holes: HOLES.slice(0),
-  thiefs: THIEFS.slice(0),
-  obstacles: [...OBSTACLES],
-  collectables: COLLECTABLES.slice(0),
+  paintings: [...PAINTINGS].map(function(painting){
+    return {...painting}
+  }),
+  barriers: [...BARRIERS].map(function(barrier){
+    return {...barrier}
+  }),
+  holes: [...HOLES].map(function(hole){
+    return {...hole}
+  }),
+  thiefs:   [...THIEFS].map(function(thief){
+    return {...thief}
+  }),
+  obstacles: [...OBSTACLES].map(function(obstacle){
+    return {...obstacle}
+  }),
+  collectables: [...COLLECTABLES].map(function(collectable){
+    return {...collectable}
+  }),
   gravity: 4,
   score: 0,
   maxScore: 4
 }
 
 function restartGame(){
-  removeHtmlItems()
+  removeHtmlItems();
+  timerId.forEach(function(timer){
+    clearInterval(timer)
+  })
   GAME.mario.posX = 60;
   GAME.mario.posY = 50;
   GAME.mario.jumping = false;
@@ -56,12 +71,30 @@ function restartGame(){
   GAME.score = 0;
   GAME.maxScore = 4;
   GAME.clouds = [];
-  GAME.paintings = PAINTINGS.slice(0);
-  GAME.barriers = BARRIERS.slice(0);
-  GAME.holes = HOLES.slice(0);
-  GAME.thiefs = THIEFS.slice(0);
-  GAME.obstacles = OBSTACLES.slice(0);
-  GAME.collectables = COLLECTABLES.slice(0);
+  GAME.paintings = [...PAINTINGS].map(function(painting){
+    return {...painting}
+  })
+  
+  GAME.barriers = [...BARRIERS].map(function(barrier){
+    return {...barrier}
+  })
+
+  GAME.holes =  [...HOLES].map(function(hole){
+    return {...hole}
+  })
+
+  GAME.thiefs =   [...THIEFS].map(function(thief){
+    return {...thief}
+  })
+
+  GAME.obstacles = [...OBSTACLES].map(function(obstacle){
+    return {...obstacle}
+  })
+
+  GAME.collectables = [...COLLECTABLES].map(function(collectable){
+    return {...collectable}
+  })
+  updateScore()
 }
 
 function updateScore(){
@@ -268,11 +301,11 @@ function updateCloudsObstacles() {
 
 
 }
-
+const timerId = [];
 function enemyStartsMoving() {
-  GAME.thiefs.forEach( function(malote) {
+  GAME.thiefs.forEach( function(malote, i) {
     malote.dir = 1
-    const timerId = setInterval(function() {
+    timerId[i] = setInterval(function() {
       malote.posX += 5*malote.dir;
       malote.html.style.left = `${malote.posX}px`
       if (malote.posX > malote.posInit + malote.posIncr * 5){ 
@@ -293,7 +326,10 @@ function enemyStartsMoving() {
         && malote.posY < GAME.mario.posY + GAME.mario.height
       ) {
         console.log('muerteeee');
+       
         restartGame()
+ /* una funcion que  ponga un div (MUERTE ) con un boton que tenga un evento que haga init()*/
+/*luego quitar el init() de aqui abajo*/
         init()
       }
     }, 50)
@@ -424,7 +460,9 @@ function fallDown(speed=50) {
         if (GAME.mario.posY < -50) {
           clearInterval(timerId)
           GAME.mario.jumping = false;
-          alert('YOU LOST IN THE CRACKS')
+          restartGame()
+          /*lo mismo que en la muerte por ladrón*/
+          init()
         }
       }
     }
