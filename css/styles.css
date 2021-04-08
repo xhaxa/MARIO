@@ -1,16 +1,19 @@
 @font-face {
-  font-family: SuperMarioBrosWii;
-  src: url(/css/SuperMarioBrosWii.otf);
+  font-family: SuperMario2;
+  src: url(/css/SuperMario2.ttf);
+
 }
-body {
+html {
   font-family: monospace;
+  
 }
 
 #game-title {
   text-align: center;
-  font-size: 80px;
-  color:#09a091;
-  font-family: SuperMarioBrosWii;
+  font-size: 280px;
+  color:#ffffff;
+  font-family: SuperMario2;
+  letter-spacing: 3px;
   font-size: 100px;
   margin: 0 auto;
 }
@@ -84,7 +87,7 @@ div.points > p {
 }
 
 .blur {
-  filter: blur(4.9px);
+  filter: blur(1.3px);
 }
 
 
@@ -141,7 +144,7 @@ div.points > p {
 
 .hole {
   background: url(../assets/hole.svg);
-  background-size: contain;
+  background-size: cover;
   width: 120px;
   height: 50px;
   position: absolute;
@@ -286,7 +289,7 @@ div.points > p {
 }
 
 #inicio {
-  background: url("../assets/Pantalla_inicio.jpg");
+  background: url("../assets/pantalla_inicio.jpg");
   width: 1200px;
   height: 600px;
   top: 0;
@@ -312,16 +315,16 @@ div.points > p {
 }
 
 #playJuego {
-  border-radius: 30px;
+  border-radius: 20px;
   border-style: none;
   color: white;
-  box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.8);
-
-  width: 250px;
+  box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.7);
+font-family: monospace;
+  width: 220px;
   height: 80px;
-  background-color: rgb(230, 35, 207);
-  font-size: 50px;
-  bottom: 70px;
+  background-color:#213000;
+  font-size: 30px;
+  bottom: 100px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -354,24 +357,26 @@ div.points > p {
 }
 
 #level1 {
-border-radius: 30px;
+border-radius: 20px;
 border-style: none;
 color: white;
-width: 250px;
-height: 75px;
+width: 220px;
+height: 80px;
 background-color: rgb(8, 244, 158);
 box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.8);
-font-size: 25px;
+font-family: SuperMario2;
+font-size: 35px;
 color: black;
 position:absolute;
-margin-left:425px;
+margin: 0 425px;
 }
 
 .levelScreen {
 font-size: 72px;
 text-align: center;
-font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-margin: 30px 0 20px 15px;
+font-family: SuperMario2;
+letter-spacing: 2px;
+margin: 30px 0 60px 15px;
 }
 
 #starryNight {
@@ -382,26 +387,28 @@ margin: 30px 0 20px 15px;
   height:310px;
   background-size: contain;
   margin-left: 15%;
-  margin-top: 15px;
+  
 }
 
 .fichaTecnica {
   margin-left: 500px;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:monospace;
   text-align: center;
   font-size: 25px;
   color: rgb(255, 230, 0);
-  margin-top: 30px;
+
 }
 
 #letsGo {
-  border-radius: 15px;
+  border-radius: 20px;
   border-style: none;
   box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.8);
-  width: 150px;
-  height: 50px;
+  width: 220px;
+  height: 80px;
   background-color: rgb(244, 201, 8);
-  font-size: 25px;
+  font-family: SuperMario2;
+  font-size: 35px;
+  letter-spacing: 1px;
   color: black;
   margin-top: 66px;
 }

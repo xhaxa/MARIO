@@ -89,6 +89,7 @@ function cloudGeneration() {
 
     const cloudHTML = document.createElement('div')
     cloudHTML.classList.add('cloud')
+    cloudHTML.classList.add('blur')
     cloudHTML.style.top  = `${ cloud.posY }px`
     cloudHTML.style.left = `${ cloud.posX }px`
     canvas.appendChild(cloudHTML)
