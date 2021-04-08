@@ -288,7 +288,7 @@ html {
 }
 
 #inicio {
-  background: url(./assets/pantalla_inicio.jpg);
+  background: url(../assets/pantalla_inicio.jpg);
   width: 1200px;
   height: 600px;
   top: 0;
