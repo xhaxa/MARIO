@@ -178,6 +178,7 @@ function win(){
   } else {
     divWinText.innerText = 'Well done but you missed some fragments! \n\n COMING SOON:'
   }
+  audio.pause()
 }
 
 /*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
