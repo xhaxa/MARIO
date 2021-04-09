@@ -1,10 +1,9 @@
-
 /*Play button Welcome Screen - Botón PLAY Pantalla de Bienvenida*/
 const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
   pantallaInicio.setAttribute('class', 'ocultar')
-  //audio.play()
+  audio.play()
   audio.loop = true
 }
 
@@ -24,7 +23,7 @@ botonNivel.onclick = function (){
 
 /*GAME Object containing all the visual elements and obstacles in the game - Objeto GAME que contiene, todos los objetos y obstáculos del juego*/
 const GAME = {
-  numClouds: 0,
+  numClouds: 30,
   mario: {
     posX: 60,
     posY: 50,
@@ -59,8 +58,8 @@ const GAME = {
   maxScore: 4
 }
 
+
 function restartGame(){
- 
   GAME.mario.posX = 60;
   GAME.mario.posY = 50;
   GAME.mario.jumping = false;
@@ -68,6 +67,7 @@ function restartGame(){
   GAME.score = 0;
   GAME.maxScore = 4;
   GAME.clouds = [];
+  audio.play()
   GAME.paintings = [...PAINTINGS].map(function(painting){
     return {...painting}
   })
@@ -102,7 +102,6 @@ function updateScore(){
   scoreHTML.innerText = `${GAME.score}/${GAME.maxScore}`
 }
 
-
 /*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
 const canvas = document.getElementById('canvas')
 
@@ -126,7 +125,6 @@ function cloudGeneration() {
     cloudHTML.style.top  = `${ cloud.posY }px`
     cloudHTML.style.left = `${ cloud.posX }px`
     canvas.appendChild(cloudHTML)
-
     cloud.html = cloudHTML;
     GAME.clouds.push(cloud)
   }
@@ -142,7 +140,6 @@ function barriersGeneration() {
     barrierHTML.style.top  = `${ barrier.posY }px`
     barrierHTML.style.left = `${ barrier.posX }px`
     canvas.appendChild(barrierHTML)
-  
     barrier.html = barrierHTML;
   })
 }
@@ -154,7 +151,6 @@ function holeGeneration() {
     holeHTML.style.bottom  = `${ hole.posY }px`
     holeHTML.style.left = `${ hole.posX }px`
     canvas.appendChild(holeHTML)
-  
     hole.html = holeHTML;
   })
 }
@@ -164,6 +160,7 @@ function dead() {
   timerId.forEach(function(timer){
     clearInterval(timer)
   })
+  audio.pause()
   const divMuerte = document.getElementById('muerte');
   divMuerte.style.display = 'block';
 }
@@ -200,7 +197,6 @@ function obstacleGeneration() {
       if (obstacle.type === 'vitrina'){
         obstacleHTML.classList.add('hasCollectable')
       }
-
     obstacleHTML.style.left = `${ obstacle.posX }px`
     obstacleHTML.style.bottom = `${ obstacle.posY }px`
     obstacleHTML.style.width = `${ obstacle.width }px`
@@ -212,7 +208,6 @@ function obstacleGeneration() {
 
 function thiefsGeneration() {
   GAME.thiefs.forEach( function(thief) {
-    // console.log(thief);
     const thiefHTML = document.createElement('div')
     thiefHTML.classList.add('thief')
     thiefHTML.style.left = `${ thief.posX }px`
@@ -317,9 +312,9 @@ function updateCloudsObstacles() {
     collectable.posX -= GAME.mario.width
     collectable.html.style.left = `${collectable.posX}px`
   })
-
-
 }
+
+
 const timerId = [];
 function enemyStartsMoving() {
   GAME.thiefs.forEach( function(malote, i) {
@@ -344,11 +339,7 @@ function enemyStartsMoving() {
         && malote.posY + malote.height > GAME.mario.posY
         && malote.posY < GAME.mario.posY + GAME.mario.height
       ) {
-        console.log('muerteeee');
         dead()
-        /*restartGame()
- 
-        init()*/
       }
     }, 50)
   })
@@ -365,8 +356,6 @@ function init() {
   collectablesGeneration()
   enemyStartsMoving()
   holeGeneration()
-  
-  // gravityStarts()
 }
 
 /*Checks for collision between Mario's right hand side and obstacles - Comprueba colisión entre la derecha de Mario y los obstáculos */
@@ -381,7 +370,6 @@ function isCollisionRight() {
       if (obstacle.type === 'meta') {
         win()
       }
-      // console.log("Is there a right collision?: ", isCollision)
       return true
     }
   }
@@ -397,7 +385,6 @@ function isCollisionLeft() {
       && GAME.mario.posY + GAME.mario.height > obstacle.posY
       && GAME.mario.posY < obstacle.posY + obstacle.height)
   })
-  // console.log("Is there a left collision?: ", isCollision)
   return isCollision
 }
 
@@ -412,7 +399,6 @@ function isCollisionBelow(){
       && GAME.mario.posX + GAME.mario.width > obstacle.posX;
 
     if (isCollision) {
-      // console.log("There is a below collision at:", obstacle.posY + obstacle.height);
       return obstacle.posY + obstacle.height;
     }
   }
@@ -441,7 +427,6 @@ function isCollisionAbove(){
         updateScore()
         console.log('coge el cuadro')
       }
-      // console.log("There is a ABOVE collision at:", obstacle.posY);
       return obstacle.posY
     }
   }
@@ -464,7 +449,6 @@ function fallDown(speed=50) {
         GAME.mario.jumping = false;
         GAME.mario.jSpeed = 0;
         GAME.mario.posY = distCollission - GAME.mario.height;
-        // console.log('moving up- collission detected')
         fallDown(0)
       }
     } 
@@ -476,18 +460,14 @@ function fallDown(speed=50) {
         GAME.mario.jumping = false;
         GAME.mario.jSpeed = 0;
         GAME.mario.posY = distCollission
-        // console.log('moving down- collission detected')
       } else {
         if (GAME.mario.posY < -50) {
           clearInterval(timerId)
           GAME.mario.jumping = false;
           dead()
-          /*restartGame()
-          init()*/
         }
       }
     }
-
     updateMario()
   }, 50)
 }
@@ -498,21 +478,13 @@ document.addEventListener('keydown', function (event) {
     GAME.mario.html.classList.remove('mario-left')
     
     if (!isCollisionRight()) { 
-      if (GAME.mario.posX >= 500) {
-        console.log("ORIGINAL", OBSTACLES[0].posX);
-        console.log("ORIGINAL", GAME.obstacles[0].posX);
-        
+      if (GAME.mario.posX >= 500) {        
         updateCloudsObstacles()
       } else {
         GAME.mario.posX += GAME.mario.movement
       }
-      console.log(GAME.thiefs[0].posX);
-      // console.log('Ancho total de mario' , GAME.mario.posX + GAME.mario.width);
     }
     if (!isCollisionBelow() && !GAME.mario.jumping) fallDown(0)
-
-    // console.log("Mario PosX", GAME.mario.posX)
-    // console.log("EmptyEasel PosX", GAME.obstacles[0].posX)
   }
 
   if (event.code === 'ArrowLeft') {
@@ -527,27 +499,25 @@ document.addEventListener('keydown', function (event) {
   }
 
   if (event.code === 'ArrowUp') {
-    // console.log('mario jump');
     if (!GAME.mario.jumping) fallDown()
   }
-
-
   updateMario()
 })
 
 let restartButton = document.getElementById ('restart-button')
-
 restartButton.addEventListener('click', function(){
-  console.log('fdsfasd');
   restartGame()
 })
 
 document.getElementById('win-button').addEventListener('click', function(){
   if (GAME.score < GAME.maxScore){
     restartGame()
+    const divWinText = document.getElementById('win');
+    divWinText.style.display = 'none'
   } else {
-    const divWinText = document.getElementById('win-text')
-    divWinText.innerText = 'Juego DEMO, próximas versiones'
+    restartGame()
+    const divWinText = document.getElementById('win')
+    divWinText.style.display = 'none'
   }
 })
 
