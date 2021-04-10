@@ -1,4 +1,3 @@
-/*Play button Welcome Screen - Botón PLAY Pantalla de Bienvenida*/
 const botonHTML = document.getElementById('playJuego');
 botonHTML.onclick = function (){
   var pantallaInicio = document.getElementById('inicio');
@@ -7,21 +6,21 @@ botonHTML.onclick = function (){
   audio.loop = true
 }
 
-/*Level 1 button Instructions Screen - Botón Level 1 Pantalla de Instrucciones*/
+
 const botonInstrucciones = document.getElementById('level1');
 botonInstrucciones.onclick = function (){
   var pantallaInstrucciones = document.getElementById('instrucciones');
   pantallaInstrucciones.setAttribute('class', 'ocultar')
 }
 
-/*Let's Go button Leven 1 Screen - Botón Let's Go Pantalla Nivel 1*/
+
 const botonNivel = document.getElementById('letsGo');
 botonNivel.onclick = function (){
   var pantallaNivel = document.getElementById('nivel1');
   pantallaNivel.setAttribute('class', 'ocultar')
 }
 
-/*GAME Object containing all the visual elements and obstacles in the game - Objeto GAME que contiene, todos los objetos y obstáculos del juego*/
+
 const GAME = {
   numClouds: 30,
   mario: {
@@ -102,16 +101,13 @@ function updateScore(){
   scoreHTML.innerText = `${GAME.score}/${GAME.maxScore}`
 }
 
-/*CANVAS div is the display screen of the game - El div CANVAS es la pantalla donde se muestra el juego*/
 const canvas = document.getElementById('canvas')
 
-/*Updates Mario's position as it moves - Actualiza la posición de Mario conforme se mueve*/
 function updateMario() {
   GAME.mario.html.style.left = GAME.mario.posX + 'px'
   GAME.mario.html.style.bottom = GAME.mario.posY + 'px'
 }
 
-/*Generates clouds randomly between certain posX and posY - Genera nubes aleatoriamente entre determinados valores de posX y posY*/
 function cloudGeneration() {
   for (var i = 0; i < GAME.numClouds; i++) {
     let cloud = {
@@ -130,9 +126,7 @@ function cloudGeneration() {
   }
 }
 
-/*Generates the barriers in front of the paintings at fixed positions - Genera las barreras delante de los cuadros en posiciones fijas*/
 function barriersGeneration() {
-
   GAME.barriers.forEach(function(barrier) {
     const barrierHTML = document.createElement('div')
     barrierHTML.classList.add('barrier')
@@ -181,7 +175,6 @@ function win(){
   audio.pause()
 }
 
-/*Generates Mario according to the values given to him in the object GAME - Genera a Mario de acuerdo a los valores asignados en el objeto GAME*/
 function marioGeneration() {
   const marioHTML = document.getElementById('mario')
   marioHTML.style.left = `${ GAME.mario.posX }px`
@@ -190,7 +183,6 @@ function marioGeneration() {
   marioHTML.style.height = `${ GAME.mario.height }px`
 }
 
-/*Generates the obstacles according to the values given in the object GAME - Genera obstáculos de acuerdo a los valores asignados en el objeto GAME*/
 function obstacleGeneration() {
   GAME.obstacles.forEach( function(obstacle) {
     const obstacleHTML = document.createElement('div')
@@ -219,7 +211,7 @@ function thiefsGeneration() {
     thief.html = thiefHTML
   })  
 }
-/*Generates the paintings according to the values given in the object GAME - Genera los cuadros de acuerdo a los valores asignados en el objeto GAME*/
+
 function paintingsGeneration() {
   GAME.paintings.forEach( function(painting) {
     const paintingHTML = document.createElement('div')
@@ -277,7 +269,6 @@ function removeHtmlItems() {
   })
 }
 
-/*Updates the positions of the elements (clouds, obstacles, paitings, barriers) to create impression of movement as we play with Mario - Actualiza la posición de los elementos (nubes, obstáculos, cuadros, barreras) para generar sensación de movimiento mientras jugamos con Mario*/
 function updateCloudsObstacles() {
   GAME.clouds.forEach(function (cloud) {
     cloud.posX -= GAME.mario.width
@@ -346,7 +337,6 @@ function enemyStartsMoving() {
   })
 }
 
-/*Initialises the game by excecuting all the functions that generate elements - Inicializar el juego al ejecutir las funciones que generan los elementos*/
 function init() {
   marioGeneration()
   cloudGeneration()
@@ -359,7 +349,6 @@ function init() {
   holeGeneration()
 }
 
-/*Checks for collision between Mario's right hand side and obstacles - Comprueba colisión entre la derecha de Mario y los obstáculos */
 function isCollisionRight() {
   for (let i = 0; i < GAME.obstacles.length; i++) {
     const obstacle = GAME.obstacles[i];
@@ -377,7 +366,7 @@ function isCollisionRight() {
   return false
 }
 
-/*Checks for collision between Mario's left hand side and obstacles - Comprueba colisión entre la izquierda de Mario y los obstáculos */
+
 function isCollisionLeft() {
   let isCollision = false;
   GAME.obstacles.forEach( function(obstacle) {
@@ -389,7 +378,7 @@ function isCollisionLeft() {
   return isCollision
 }
 
-/*Checks for collision between Mario's feet hand side and obstacles - Comprueba colisión entre los pies de Mario y los obstáculos */
+
 function isCollisionBelow(){
   for (let i = 0; i < GAME.obstacles.length; i++) {
     const obstacle = GAME.obstacles[i];
@@ -406,7 +395,7 @@ function isCollisionBelow(){
   return false
 }
 
-/*Checks for collision between Mario's head hand side and obstacles - Comprueba colisión entre la cabeza de Mario y los obstáculos */
+
 function isCollisionAbove(){
   for (let i = 0; i < GAME.obstacles.length; i++) {
     const obstacle = GAME.obstacles[i];
@@ -418,7 +407,6 @@ function isCollisionAbove(){
       && GAME.mario.posX + GAME.mario.width > obstacle.posX;
 
     if (isCollision ) {
-      console.log(obstacle.html.classList); 
       if (obstacle.type === 'vitrina' && obstacle.html.classList.contains('hasCollectable')) {
         obstacle.html.classList.remove('hasCollectable')
         GAME.score++
@@ -426,7 +414,6 @@ function isCollisionAbove(){
          return collectable.posX > obstacle.posX && collectable.posX < obstacle.posX + obstacle.width  
         })[0].html.remove()
         updateScore()
-        console.log('coge el cuadro')
       }
       return obstacle.posY
     }
@@ -434,7 +421,6 @@ function isCollisionAbove(){
   return false
 }
 
-/*Allows Mario to jump and stop once collision is detected on his head or feet - Permite saltar a Mario y detectar colisión en su cabeza y sus pies */
 function fallDown(speed=50) {
   GAME.mario.jumping = true
   GAME.mario.jSpeed += speed
@@ -473,7 +459,6 @@ function fallDown(speed=50) {
   }, 50)
 }
 
-/*EventListeners to move Mario using arrow keys - EventListeners para mover a Mario usando las teclas de las flechas */
 document.addEventListener('keydown', function (event) {
   if (event.code === 'ArrowRight') {
     GAME.mario.html.classList.remove('mario-left')
@@ -522,5 +507,4 @@ document.getElementById('win-button').addEventListener('click', function(){
   }
 })
 
-/* Initialise function that generates the elements - Inicializa la función que genera los elementos */
 init()
