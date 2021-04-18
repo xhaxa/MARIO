@@ -25,4 +25,4 @@ The one central piece of code of this videogame is the one that focuses on colli
 
 At the moment, **Get The Picture!** has one level. Additional levels will be developed in the future with further obstacles and increased difficulty as well as other artists. The idea is also to create a **Get The Picture!** for other areas of knowledge such as natural sciences, literature, music, etc.
 
-Game developed by https://github.com/xhaxa and https://github.com/jorlorsan | With the help of teaching body https://reboot.academy/
+Game developed by https://github.com/xhaxa and https://github.com/jorlorsan | With the help of the teaching body @ https://reboot.academy/
