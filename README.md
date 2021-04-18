@@ -1,6 +1,8 @@
 # <div align="center"> Get The Picture! </div>
 ![pantalla_inicial](https://user-images.githubusercontent.com/77930436/114247128-4b232e00-998c-11eb-8621-aea9b0192902.jpg)
 
+Play the game: https://xhaxa.github.io/MARIO/
+
 Inspired by the all time classic Mario Bros., **Get The Picture!** is a one-player game in which internationally renowned artists need to navigate the museum to  collect fragments of their masterpieces while avoiding the immovable heaps of tourists, the cracks on the floor of the old building and being chased by the thieves that roam the galleries in search of valuable paintings.
 
 The fragments that need collecting are in shiny display cases that only the artists can unlock by knocking from below. An empty easel awaits at the end of the level, where the artist can put all the collected fragments together, and move on to the next level.
